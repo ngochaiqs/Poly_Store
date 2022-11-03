@@ -73,9 +73,9 @@ public class DangKyActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    FirebaseUser tenND = firebaseAuth.getCurrentUser();
-                                    if (tenND != null) {
-                                        postData(str_tenND,str_email, str_matKhau, str_sdt, tenND.getUid());
+                                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                                    if (user != null) {
+                                        postData(str_tenND,str_email, str_matKhau, str_sdt, user.getUid());
                                     }
 
 

@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe(
                                             messageModel -> {
-
+                                              Log.d("///===","Token: "+s);
                                             },
                                             throwable -> {
                                                 Log.d("log",throwable.getMessage());

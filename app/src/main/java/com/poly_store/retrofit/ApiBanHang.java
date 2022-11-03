@@ -70,7 +70,7 @@ public interface ApiBanHang {
     @FormUrlEncoded
     Observable<MessageModel> updateOrder(
             @Field("maDH") int maDH,
-            @Field("trangthai") int trangthai
+            @Field("trangThai") int trangThai
     );
     @POST("xemdon.php")
     @FormUrlEncoded
@@ -118,7 +118,7 @@ public interface ApiBanHang {
     @POST("updatetoken.php")
     @FormUrlEncoded
     Observable<MessageModel> updateToken(
-            @Field("id") int tenSP,
+            @Field("maND") int maND,
             @Field("token") String token
     );
     @Multipart
