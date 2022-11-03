@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Paper.init(this);
-        if (Paper.book().read("nguoidung") != null){
-            NguoiDung nguoiDung = Paper.book().read("nguoidung");
+        if (Paper.book().read("user") != null){
+            NguoiDung nguoiDung = Paper.book().read("user");
             Utils.nguoidung_current = nguoiDung;
 
         }
