@@ -8,7 +8,16 @@ public class DonHang {
     String diaChi;
     String SDT;
     String tongTien;
+    int trangThai;
     List<Item> item;
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
 
     public int getMaDH() {
         return maDH;
