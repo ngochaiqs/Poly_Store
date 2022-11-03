@@ -9,9 +9,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.poly_store.R;
 import com.poly_store.retrofit.ApiBanHang;
 import com.poly_store.retrofit.RetrofitClient;
@@ -28,8 +34,11 @@ public class DangNhapActivity extends AppCompatActivity {
     EditText email, matKhau;
     AppCompatButton btndangnhap;
     ApiBanHang apiBanHang;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser tenND;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
-    boolean isLogin = false;
+    private boolean isLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,10 +80,30 @@ public class DangNhapActivity extends AppCompatActivity {
                     Paper.book().write("email",str_email);
                     Paper.book().write("matKhau",str_matKhau);
                     dangNhap(str_email, str_matKhau);
+                    if (tenND != null){
+                        //user da co dang nhap firebase
+                        dangNhap(str_email,str_matKhau);
+                    }else {
+                        firebaseAuth.signInWithEmailAndPassword(str_email,str_matKhau)
+                                .addOnCompleteListener(DangNhapActivity.this, new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()){
+                                            dangNhap(str_email, str_matKhau);
+                                        }
+                                    }
+                                });
+                    }
+
+
+
+
                 }
             }
         });
     }
+
+
 
     private void initView(){
         Paper.init(this);
@@ -85,35 +114,38 @@ public class DangNhapActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         matKhau = findViewById(R.id.matKhau);
         btndangnhap = findViewById(R.id.btndangnhap);
+        firebaseAuth = FirebaseAuth.getInstance();
+        tenND = firebaseAuth.getCurrentUser();
 
         //read data
         if (Paper.book().read("email") != null && Paper.book().read("matKhau") != null){
             email.setText(Paper.book().read("email"));
             matKhau.setText(Paper.book().read("matKhau"));
-            if (Paper.book().read("isLogin") != null){
-                boolean flag = Paper.book().read("isLogin");
-                if(flag){
+            if (Paper.book().read("islogin")!= null){
+                boolean flag = Paper.book().read("islogin");
+                if (flag){
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            dangNhap(Paper.book().read("email"), Paper.book().read("matKhau"));
+//                                 dangNhap(Paper.book().read("email"), Paper.book().read("matkhau"));
                         }
-                    }, 1000);
+                    },100);
                 }
             }
         }
     }
+    private void dangNhap( String email, String matkhau) {
 
-    private void dangNhap(String email, String matKhau) {
-        compositeDisposable.add(apiBanHang.dangNhap(email, matKhau)
+        compositeDisposable.add(apiBanHang.dangNhap(email,matkhau)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         nguoiDungModel -> {
                             if (nguoiDungModel.isSuccess()){
-                                isLogin = true;
-                                Paper.book().write("isLogin",isLogin);
+                                isLogin  = true;
+                                Paper.book().write("islogon",isLogin);
                                 Utils.nguoidung_current = nguoiDungModel.getResult().get(0);
+                                //luu lai thong tin
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                                 finish();

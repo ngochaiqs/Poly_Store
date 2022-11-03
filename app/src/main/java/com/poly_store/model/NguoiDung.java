@@ -6,6 +6,15 @@ public class NguoiDung {
     String email;
     String matKhau;
     String SDT;
+    String uid;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public int getMaND() {
         return maND;

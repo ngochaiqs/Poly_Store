@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -23,7 +25,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.nex3z.notificationbadge.NotificationBadge;
 import com.poly_store.R;
 import com.poly_store.adapter.LoaiSPAdapter;
@@ -69,12 +74,19 @@ public class MainActivity extends AppCompatActivity {
         if (Paper.book().read("nguoidung") != null){
             NguoiDung nguoiDung = Paper.book().read("nguoidung");
             Utils.nguoidung_current = nguoiDung;
+
         }
+        getToken();
         AnhXa();
         ActionViewFlipper();
         ActionBar();
 
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
+        Paper.init(this);
+        if (Paper.book().read("user") !=null){
+            NguoiDung user = Paper.book().read("user");
+            Utils.nguoidung_current = user;
+        }
 
         if(isConnected(this)){
             Toast.makeText(getApplicationContext(), "Đã kết nối Internet", Toast.LENGTH_SHORT).show();
@@ -86,6 +98,31 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Không có Internet", Toast.LENGTH_SHORT).show();
         }
     }
+    private void getToken(){
+        FirebaseMessaging.getInstance().getToken()
+                .addOnSuccessListener(new OnSuccessListener<String>() {
+                    @Override
+                    public void onSuccess(String s) {
+                        if(!TextUtils.isEmpty(s)){
+                            compositeDisposable.add(apiBanHang.updateToken( Utils.nguoidung_current.getMaND(),s)
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(
+                                            messageModel -> {
+
+                                            },
+                                            throwable -> {
+                                                Log.d("log",throwable.getMessage());
+                                            }
+
+                                    ));
+
+
+                        }
+                    }
+                });
+    }
+
 
     private void getClickMenu() {
         lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -117,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
                     case 7:
                         // xóa key nguoidung
                         Paper.book().delete("user");
+                        FirebaseAuth.getInstance().signOut();
                         Intent dangnhap = new Intent(getApplicationContext(), DangNhapActivity.class);
                         startActivity(dangnhap);
                         finish();

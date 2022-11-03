@@ -7,9 +7,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.poly_store.R;
 import com.poly_store.retrofit.ApiBanHang;
 import com.poly_store.retrofit.RetrofitClient;
@@ -23,6 +29,7 @@ public class DangKyActivity extends AppCompatActivity {
     EditText email, matKhau, reMatKhau, sdt, tenND;
     AppCompatButton button;
     ApiBanHang apiBanHang;
+    FirebaseAuth firebaseAuth;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,30 +67,53 @@ public class DangKyActivity extends AppCompatActivity {
 
         }else{
             if (str_matKhau.equals(str_reMatKhau)){
-                //post data
-                compositeDisposable.add(apiBanHang.dangKy(str_tenND,str_email,str_matKhau,str_sdt)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                            nguoiDungModel -> {
-                                if (nguoiDungModel.isSuccess()){
-                                    Utils.nguoidung_current.setEmail(str_email);
-                                    Utils.nguoidung_current.setMatKhau(str_matKhau);
-                                    Intent intent = new Intent(getApplicationContext(), DangNhapActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }else{
-                                    Toast.makeText(getApplicationContext(), nguoiDungModel.getMessage(), Toast.LENGTH_SHORT).show();
+                firebaseAuth = FirebaseAuth.getInstance();
+                firebaseAuth.createUserWithEmailAndPassword(str_email,str_matKhau)
+                        .addOnCompleteListener(DangKyActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    FirebaseUser tenND = firebaseAuth.getCurrentUser();
+                                    if (tenND != null) {
+                                        postData(str_tenND,str_email, str_matKhau, str_sdt, tenND.getUid());
+                                    }
+
+
+                                }else {
+                                    Toast.makeText(getApplicationContext(),"Email da ton tai hoac khong thanh cong",Toast.LENGTH_SHORT).show();
                                 }
-                            },
-                                throwable -> {
-                                    Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                        ));
+                            }
+
+                        });
+
+
             }else{
                 Toast.makeText(getApplicationContext(), "Mat khau chua khop", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    private void  postData(String str_tenND, String str_email, String str_matKhau, String str_sdt, String uid){
+        //post data
+        compositeDisposable.add(apiBanHang.dangKy(str_tenND,str_email,str_matKhau,str_sdt, uid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        nguoiDungModel -> {
+                            if (nguoiDungModel.isSuccess()){
+                                Utils.nguoidung_current.setEmail(str_email);
+                                Utils.nguoidung_current.setMatKhau(str_matKhau);
+                                Intent intent = new Intent(getApplicationContext(), DangNhapActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else{
+                                Toast.makeText(getApplicationContext(), nguoiDungModel.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        throwable -> {
+                            Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                ));
+
     }
     private void initView(){
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
