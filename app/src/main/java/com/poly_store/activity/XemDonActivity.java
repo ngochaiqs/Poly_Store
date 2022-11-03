@@ -146,7 +146,7 @@ public class XemDonActivity extends AppCompatActivity {
                 ));
     }
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
-    public void evenDonHang(DonHangEvent event){
+    public void eventDonHang(DonHangEvent event){
         if (event !=null){
             donHang = event.getDonHang();
             showCustumDialog();
