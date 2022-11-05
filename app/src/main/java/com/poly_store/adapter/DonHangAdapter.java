@@ -63,7 +63,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyviewHo
             }
         });
     }
-    private  String trangThaiDon(int status){
+    private String trangThaiDon(int status){
         String result = "";
         switch (status){
             case 0:

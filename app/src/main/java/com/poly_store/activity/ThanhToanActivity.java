@@ -79,7 +79,7 @@ public class ThanhToanActivity extends AppCompatActivity {
                     String str_sdt = Utils.nguoidung_current.getSDT();
                     int maND = Utils.nguoidung_current.getMaND();
 
-                    Log.d("test", new Gson().toJson(Utils.mangmuahang));
+                    Log.d("==/ Thông tin thanh toán:", new Gson().toJson(Utils.mangmuahang));
                     compositeDisposable.add(apiBanHang.datHang(str_email, str_sdt, String.valueOf(tongtien), maND, str_diachi, totalItem, new Gson().toJson(Utils.mangmuahang))
 
                             .subscribeOn(Schedulers.io())

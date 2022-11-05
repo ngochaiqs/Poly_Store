@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -138,6 +139,7 @@ public class XemDonActivity extends AppCompatActivity {
                 .subscribe(
                         messageModel -> {
                             getOrder();
+                            Toast.makeText(this, messageModel.getMessage(), Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         },
                         throwable -> {
