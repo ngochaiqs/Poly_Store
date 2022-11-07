@@ -143,7 +143,7 @@ public class DangNhapActivity extends AppCompatActivity {
                         nguoiDungModel -> {
                             if (nguoiDungModel.isSuccess()){
                                 isLogin  = true;
-                                Paper.book().write("islogon",isLogin);
+                                Paper.book().write("islogin",isLogin);
                                 Utils.nguoidung_current = nguoiDungModel.getResult().get(0);
                                 //luu lai thong tin
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
