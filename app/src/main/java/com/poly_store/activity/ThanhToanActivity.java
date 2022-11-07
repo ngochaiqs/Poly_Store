@@ -15,11 +15,17 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.poly_store.R;
+import com.poly_store.model.NotiResponse;
+import com.poly_store.model.NotiSendData;
 import com.poly_store.retrofit.ApiBanHang;
+import com.poly_store.retrofit.ApiPushNofication;
 import com.poly_store.retrofit.RetrofitClient;
+import com.poly_store.retrofit.RetrofitClientNoti;
 import com.poly_store.utils.Utils;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -42,17 +48,18 @@ public class ThanhToanActivity extends AppCompatActivity {
         initView();
         initControl();
         countItem();
+        pushNotiToUser();
     }
 
     private void countItem() {
         totalItem = 0;
-        for (int i=0; i<Utils.manggiohang.size(); i++ ){
-            totalItem= totalItem + Utils.manggiohang.get(i).getSoluongGH();
+        for (int i = 0; i < Utils.manggiohang.size(); i++) {
+            totalItem = totalItem + Utils.manggiohang.get(i).getSoluongGH();
 
         }
     }
 
-    private void initControl(){
+    private void initControl() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -72,9 +79,9 @@ public class ThanhToanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String str_diachi = edtdiachi.getText().toString().trim();
-                if (TextUtils.isEmpty(str_diachi)){
+                if (TextUtils.isEmpty(str_diachi)) {
                     Toast.makeText(getApplicationContext(), "Bạn chưa nhập địa chỉ!", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     String str_email = Utils.nguoidung_current.getEmail();
                     String str_sdt = Utils.nguoidung_current.getSDT();
                     int maND = Utils.nguoidung_current.getMaND();
@@ -85,20 +92,54 @@ public class ThanhToanActivity extends AppCompatActivity {
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(nguoiDungModel -> {
-                                    Toast.makeText(getApplicationContext(), "Đặt hàng thành công!", Toast.LENGTH_SHORT).show();
-                                    Utils.mangmuahang.clear();
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                Toast.makeText(getApplicationContext(), "Đặt hàng thành công!", Toast.LENGTH_SHORT).show();
+                                Utils.mangmuahang.clear();
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                                finish();
                             }, throwable -> {
                                 Toast.makeText(getApplicationContext(), "Đặt hàng thất bại!", Toast.LENGTH_SHORT).show();
                             }));
-    }
+                }
             }
         });
     }
 
-    private void initView(){
+    private void pushNotiToUser() {
+        //getToken
+        compositeDisposable.add(apiBanHang.gettoken(1)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        nguoiDungModel -> {
+                            if (nguoiDungModel.isSuccess()) {
+                                for (int i = 0; i < nguoiDungModel.getResult().size(); i++) {
+                                    Map<String, String> data = new HashMap<>();
+                                    data.put("title", "thong bao");
+                                    data.put("body", "Ban co don hang moi");
+                                    NotiSendData notiSendData = new NotiSendData(nguoiDungModel.getResult().get(i).getToken(), data);
+                                    ApiPushNofication apiPushNofication = RetrofitClientNoti.getInstance().create(ApiPushNofication.class);
+                                    compositeDisposable.add(apiPushNofication.sendNofitication(notiSendData)
+                                            .subscribeOn(Schedulers.io())
+                                            .observeOn(AndroidSchedulers.mainThread())
+                                            .subscribe(
+                                                    notiResponse -> {
+                                                    },
+                                                    throwable -> {
+                                                        Log.d("Logg", throwable.getMessage());
+                                                    }
+                                            ));
+                                }
+                            }
+
+                        },
+                        throwable -> {
+                            Log.d("loggg", throwable.getMessage());
+                        }
+                ));
+    }
+
+    private void initView() {
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         toolbar = findViewById(R.id.toobar);
         txttongtien = findViewById(R.id.txttongtien);

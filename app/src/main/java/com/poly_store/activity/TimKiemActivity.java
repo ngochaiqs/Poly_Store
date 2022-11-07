@@ -35,7 +35,6 @@ public class TimKiemActivity extends AppCompatActivity {
     EditText edtSearch;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +60,11 @@ public class TimKiemActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() == 0){
+                if (s.length() == 0) {
                     sanPhamList.clear();
                     adapterAK = new AoKhoacAdapter(getApplicationContext(), sanPhamList);
                     recyclerView.setAdapter(adapterAK);
-                }else {
+                } else {
                     getDataSearch(s.toString());
                 }
             }
@@ -84,7 +83,7 @@ public class TimKiemActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         sanPhamModel -> {
-                            if (sanPhamModel.isSuccess()){
+                            if (sanPhamModel.isSuccess()) {
                                 sanPhamList = sanPhamModel.getResult();
                                 adapterAK = new AoKhoacAdapter(getApplicationContext(), sanPhamList);
                                 recyclerView.setAdapter(adapterAK);
@@ -97,7 +96,7 @@ public class TimKiemActivity extends AppCompatActivity {
                 ));
     }
 
-    private void ActionToolBar(){
+    private void ActionToolBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
