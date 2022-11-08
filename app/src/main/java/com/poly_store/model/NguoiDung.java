@@ -64,4 +64,12 @@ public class NguoiDung {
     public void setSDT(String SDT) {
         this.SDT = SDT;
     }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }
