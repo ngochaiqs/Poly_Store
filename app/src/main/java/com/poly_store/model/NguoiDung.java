@@ -7,6 +7,8 @@ public class NguoiDung {
     String matKhau;
     String SDT;
     String uid;
+    String token;
+
 
     public String getUid() {
         return uid;
@@ -54,5 +56,13 @@ public class NguoiDung {
 
     public void setSDT(String SDT) {
         this.SDT = SDT;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

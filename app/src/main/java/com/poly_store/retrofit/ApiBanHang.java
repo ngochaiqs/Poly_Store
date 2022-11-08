@@ -3,6 +3,7 @@ package com.poly_store.retrofit;
 import com.poly_store.model.DonHangModel;
 import com.poly_store.model.LoaiSPModel;
 import com.poly_store.model.MessageModel;
+import com.poly_store.model.NguoiDung;
 import com.poly_store.model.NguoiDungModel;
 import com.poly_store.model.SanPhamModel;
 
@@ -115,6 +116,13 @@ public interface ApiBanHang {
 
     );
 
+    @POST("gettoken.php")
+    @FormUrlEncoded
+    Observable<NguoiDungModel> getToken(
+            @Field("status") int status,
+            @Field("maND") int maND
+    );
+
     @POST("updatetoken.php")
     @FormUrlEncoded
     Observable<MessageModel> updateToken(
@@ -126,6 +134,7 @@ public interface ApiBanHang {
     Call<MessageModel> uploadFile(
             @Part MultipartBody.Part file
     );
+
     @POST("gettoken.php")
     @FormUrlEncoded
     Observable<NguoiDungModel> gettoken(
