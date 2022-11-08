@@ -135,5 +135,9 @@ public interface ApiBanHang {
             @Part MultipartBody.Part file
     );
 
-
+    @POST("gettoken.php")
+    @FormUrlEncoded
+    Observable<NguoiDungModel> gettoken(
+            @Field("status") int status
+    );
 }

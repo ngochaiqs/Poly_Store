@@ -12,6 +12,15 @@
         <entry key="..\:/Poly_Store/app/src/main/res/drawable/ic_cart_24.xml" value="0.2095" />
         <entry key="..\:/Poly_Store/app/src/main/res/layout/activity_ao_khoac.xml" value="0.1" />
         <entry key="..\:/Poly_Store/app/src/main/res/layout/activity_chi_tiet.xml" value="0.2" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/Poly_Store/app/src/main/res/drawable/back_inputtex.xml" value="0.1" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/Poly_Store/app/src/main/res/drawable/back_received.xml" value="0.1" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/Poly_Store/app/src/main/res/drawable/back_send_mess.xml" value="0.229" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/Poly_Store/app/src/main/res/drawable/back_sendmess.xml" value="0.1" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/Poly_Store/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.229" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/Poly_Store/app/src/main/res/layout/activity_chat.xml" value="0.19021739130434784" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/Poly_Store/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/Poly_Store/app/src/main/res/layout/item_received.xml" value="0.19021739130434784" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/Poly_Store/app/src/main/res/layout/item_send_mess.xml" value="0.19021739130434784" />
         <entry key="..\:/Users/luong/AndroidStudioProjects/Poly_Store/app/src/main/res/layout/activity_ao_khoac.xml" value="0.2726449275362319" />
         <entry key="..\:/Users/luong/AndroidStudioProjects/Poly_Store/app/src/main/res/layout/activity_chi_tiet.xml" value="0.16" />
         <entry key="..\:/Users/luong/AndroidStudioProjects/Poly_Store/app/src/main/res/layout/activity_dang_ky.xml" value="0.1" />
