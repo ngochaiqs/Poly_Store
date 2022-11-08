@@ -157,7 +157,7 @@ public class XemDonActivity extends AppCompatActivity {
     }
     private void pushNotiToUser() {
         //get token
-        compositeDisposable.add(apiBanHang.getToken(0, donHang.getMaND())
+        compositeDisposable.add(apiBanHang.getToken(0, donHang.getMaDH())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -165,7 +165,7 @@ public class XemDonActivity extends AppCompatActivity {
                             if (nguoiDungModel.isSuccess()){
                                 for (int i =0; i<nguoiDungModel.getResult().size(); i++){
                                     Map<String, String> data = new HashMap<>();
-                                    data.put("title", "thong bao");
+                                    data.put("title", "Thông báo từ admin");
                                     data.put("body", trangThaiDon(tinhtrang));
                                     NotiSendData notiSendData = new NotiSendData(nguoiDungModel.getResult().get(i).getToken(), data);
                                     ApiPushNofication apiPushNofication = RetrofitClientNoti.getInstance().create(ApiPushNofication.class);
