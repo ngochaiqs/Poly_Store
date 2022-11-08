@@ -157,7 +157,7 @@ public class XemDonActivity extends AppCompatActivity {
     }
     private void pushNotiToUser() {
         //get token
-        compositeDisposable.add(apiBanHang.getToken(0, donHang.getMaDH())
+        compositeDisposable.add(apiBanHang.getToken(0, donHang.getMaND())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
