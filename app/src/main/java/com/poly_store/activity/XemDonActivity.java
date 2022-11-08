@@ -48,6 +48,7 @@ public class XemDonActivity extends AppCompatActivity {
     DonHang donHang;
     int tinhtrang;
     AlertDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +60,7 @@ public class XemDonActivity extends AppCompatActivity {
     }
 
     private void getOrder() {
-        compositeDisposable.add(apiBanHang.xemDonHang(Utils.nguoidung_current.getMaND())
+        compositeDisposable.add(apiBanHang.xemDonHang(0)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -84,7 +85,7 @@ public class XemDonActivity extends AppCompatActivity {
         });
     }
 
-    private void initView(){
+    private void initView() {
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         redonhang = findViewById(R.id.recycleview_donhang);
         toolbar = findViewById(R.id.toobar);
@@ -101,7 +102,7 @@ public class XemDonActivity extends AppCompatActivity {
 
     private void showCustumDialog() {
         LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_donhang,null);
+        View view = inflater.inflate(R.layout.dialog_donhang, null);
         Spinner spinner = view.findViewById(R.id.spinner_dialogdonhang);
         AppCompatButton btndongy = view.findViewById(R.id.dongy_dialogdonhang);
         List<String> list = new ArrayList<>();
@@ -110,7 +111,7 @@ public class XemDonActivity extends AppCompatActivity {
         list.add("Đơn hàng đã giao cho đơn vị vận chuyển");
         list.add("Thành công");
         list.add("Đơn hàng đã hủy");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,list);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, list);
         spinner.setAdapter(adapter);
         spinner.setSelection(donHang.getTrangThai());
 
@@ -139,7 +140,7 @@ public class XemDonActivity extends AppCompatActivity {
     }
 
     private void capNhatDonHang() {
-        compositeDisposable.add(apiBanHang.updateOrder(donHang.getMaDH(),tinhtrang)
+        compositeDisposable.add(apiBanHang.updateOrder(donHang.getMaDH(), tinhtrang)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -154,7 +155,6 @@ public class XemDonActivity extends AppCompatActivity {
                         }
                 ));
     }
-
     private void pushNotiToUser() {
         //get token
         compositeDisposable.add(apiBanHang.getToken(0, donHang.getMaND())

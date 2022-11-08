@@ -3,12 +3,14 @@ package com.poly_store.retrofit;
 import com.poly_store.model.NotiResponse;
 import com.poly_store.model.NotiSendData;
 
+import io.reactivex.Completable;
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface ApiPushNofication {
+    //Completable sendNofitication(NotiSendData notiSendData);
     @Headers(
             {
                     "content-type: application/json",
