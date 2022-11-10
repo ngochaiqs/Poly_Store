@@ -9,6 +9,9 @@ public class NguoiDung {
     String uid;
     String token;
 
+    public NguoiDung()  {
+    }
+
     public String getToken() {
         return token;
     }

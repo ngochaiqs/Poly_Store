@@ -29,7 +29,16 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         initView();
         initControl();
+        insertUser();
     }
+
+    private void insertUser() {
+        HashMap<String, Object> user = new HashMap<>();
+        user.put("id", Utils.nguoidung_current.getMaND());
+        user.put("username", Utils.nguoidung_current.getTenND());
+        db.collection("users").document(String.valueOf(Utils.nguoidung_current.getMaND())).set(user);
+    }
+
     private void initControl(){
         imgSend.setOnClickListener(new View.OnClickListener() {
             @Override
