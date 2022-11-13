@@ -152,10 +152,14 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(quanli);
                         break;
                     case 7:
+                        Intent thongke = new Intent(getApplicationContext(), ThongKeActivity.class);
+                        startActivity(thongke);
+                        break;
+                    case 8:
                         Intent chat = new Intent(getApplicationContext(), UserActivity.class);
                         startActivity(chat);
                         break;
-                    case 8:
+                    case 9:
                         // xóa key nguoidung
                         Paper.book().delete("user");
                         FirebaseAuth.getInstance().signOut();
@@ -195,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
                                 loaiSPList.add(new LoaiSP("Quản lý",""));
                                 loaiSPList.add(new LoaiSP("Chat",""));
                                 loaiSPList.add(new LoaiSP("Đăng xuất",""));
+                                loaiSPList.add(new LoaiSP("Thống kê",""));
                                 loaiSPAdapter = new LoaiSPAdapter(getApplicationContext(),loaiSPList);
                                 lvMain.setAdapter(loaiSPAdapter);
                             }

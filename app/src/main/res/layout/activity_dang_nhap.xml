@@ -9,11 +9,12 @@
         android:id="@+id/txtdangnhap"
         app:layout_constraintTop_toTopOf="parent"
         android:text="Đăng nhập"
+        android:textStyle="bold"
         android:textSize="25sp"
-        android:textColor="@color/colortext"
+        android:textColor="@color/black"
+        android:background="#B2B4C1"
         android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:padding="5dp"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <com.google.android.material.textfield.TextInputLayout
@@ -33,7 +34,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:drawableLeft="@drawable/ic_baseline_email_24"
-            android:drawablePadding="5dp"
+            android:drawablePadding="4dp"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -54,19 +55,20 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:drawableLeft="@drawable/ic_baseline_vpn_key_24"
-            android:drawablePadding="5dp"
+            android:drawablePadding="4dp"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btndangnhap"
         app:layout_constraintTop_toBottomOf="@id/line2"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginLeft="35dp"
         android:background="@drawable/background_button"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_marginTop="10dp"
         android:text="Đăng Nhập"
+        android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -76,7 +78,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        android:gravity="center"
         android:id="@+id/line6"
         app:layout_constraintTop_toBottomOf="@id/btndangnhap"
         android:layout_width="match_parent"
@@ -85,29 +88,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bạn chưa có tài khoản?"
-            android:textSize="15sp"
+            android:textSize="16sp"
+            android:gravity="center"
             />
         <TextView
-            android:layout_marginLeft="5dp"
             android:text="Tạo tài khoản"
             android:id="@+id/txtdangky"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textStyle="bold"
+            android:gravity="center"
             android:textColor="@android:color/holo_red_light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
-
-
 
     </LinearLayout>
     <TextView
         app:layout_constraintTop_toBottomOf="@+id/line6"
         android:layout_marginTop="15dp"
         android:text="Quên mật khẩu?"
-        android:textColor="@color/colortext"
+        android:textColor="@android:color/holo_red_light"
         android:gravity="center"
-        android:textSize="15sp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="25dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:id="@+id/txtresetMK"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -25,8 +25,10 @@
                 android:id="@+id/tvTenSanPham"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="2dp"
                 android:text="Áo thun"
-                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
                 android:gravity="center"
                 android:textStyle="bold" />
             <TextView
@@ -34,6 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="100.000đ"
+                android:padding="2dp"
                 android:textSize="15sp"
                 android:gravity="center"
                 android:textStyle="bold"
@@ -42,6 +45,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_margin="5dp"
             android:layout_gravity="top|right"
             android:src="@drawable/icon_new_w128" />
     </FrameLayout>
