@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/imgLoaiSP"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="15dp"
         android:src="@drawable/icon_new_w128"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -16,10 +16,9 @@
     <TextView
         android:id="@+id/tvLoaiSP"
         android:text="Áo Khoác"
-        android:textColor="#03A9F4"
-        android:textStyle="bold"
+        android:textColor="@color/black"
         android:textSize="20dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="22dp"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

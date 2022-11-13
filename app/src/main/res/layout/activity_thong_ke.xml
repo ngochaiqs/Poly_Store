@@ -5,5 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.ThongKeActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarThongKe"
+        app:title="Thống Kê"
+        android:background="#B2B4C1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+    </androidx.appcompat.widget.Toolbar>
+    <com.github.mikephil.charting.charts.PieChart
+        app:layout_constraintTop_toBottomOf="@id/toolbarThongKe"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/piechartThongKe"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

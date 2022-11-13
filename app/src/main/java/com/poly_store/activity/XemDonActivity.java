@@ -211,8 +211,6 @@ public class XemDonActivity extends AppCompatActivity {
         return result;
     }
 
-
-
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
     public void eventDonHang(DonHangEvent event){
         if (event !=null){

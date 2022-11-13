@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="#ff00dfff"
-                app:title="Trang chủ">
+                app:title="Trang Chủ">
                 <LinearLayout
                     android:layout_gravity="right"
                     android:orientation="horizontal"
@@ -30,7 +30,7 @@
                     >
                 <ImageView
                     android:id="@+id/imgsearch"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginRight="4dp"
                     android:src="@drawable/ibg_fr_ic_search"
                     android:layout_width="wrap_content"
                     android:layout_height="?attr/actionBarSize"
@@ -38,9 +38,9 @@
                     <ImageView
                         android:id="@+id/image_mess"
                         android:src="@drawable/ic_baseline_message_24"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"/>
 
                 <FrameLayout
@@ -54,9 +54,9 @@
                         android:id="@+id/menu_sl"
                         android:layout_gravity="top|right"/>
                     <ImageView
-                        android:layout_marginTop="15dp"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
                         android:src="@drawable/ic_cart_24"/>
                 </FrameLayout>
                 </LinearLayout>
@@ -68,8 +68,6 @@
                 android:layout_height="180dp"
                 android:layout_margin="@dimen/dp_6"
                 android:background="@drawable/bg_corner_18">
-
-
             </ViewFlipper>
 
             <LinearLayout
@@ -79,19 +77,20 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_12"
+                    android:layout_marginRight="12dp"
                     android:background="@drawable/bg_corner_18"
                     android:text="Sản Phẩm Mới Nhất"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/dp_22" />
+                    android:textSize="20sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerviewMain"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/dp_8"
+                    android:layout_margin="6dp"
                     android:background="@drawable/bg_corner_14">
 
                 </androidx.recyclerview.widget.RecyclerView>
@@ -103,7 +102,6 @@
             android:layout_width="250dp"
             android:layout_height="match_parent"
             android:layout_gravity="start">
-
             <ListView
                 android:id="@+id/lvMain"
                 android:layout_width="wrap_content"

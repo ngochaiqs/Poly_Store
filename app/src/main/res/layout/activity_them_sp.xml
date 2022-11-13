@@ -7,7 +7,7 @@
     tools:context=".activity.ThemSPActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarThemSP"
-        app:title="Thêm sản phẩm"
+        app:title="Thêm Sản Phẩm"
         android:background="#B2B4C1"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
@@ -76,9 +76,7 @@
             android:layout_weight="1"
             android:src="@drawable/ic_baseline_camera_alt_24"
             android:layout_width="0dp"
-            android:layout_height="40dp"
-            app:tint="#3BEF0A" />
-
+            android:layout_height="40dp" />
 
     </LinearLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -109,13 +107,13 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnthemsp"
         app:layout_constraintTop_toBottomOf="@+id/spinner_loai_themsp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginLeft="35dp"
         android:layout_marginTop="20dp"
         android:text="Thêm sản phẩm"
         android:background="@drawable/background_button"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
         android:textAllCaps="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -21,7 +21,8 @@
             android:paddingTop="10dp"
             android:paddingLeft="10dp"
             android:paddingBottom="10dp"
-            android:hint="Noi dung chat"
+            android:hint="Nội dung chat"
+            android:textStyle="bold"
             android:layout_width="0dp"
             android:background="@drawable/back_inputtex"
             android:layout_height="wrap_content"/>
@@ -31,15 +32,19 @@
             android:layout_width="0dp"
             android:layout_gravity="center"
             android:layout_weight="2"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             app:tint="@color/colortext" />
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleview_chat"
-        android:layout_margin="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/line1"
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/line1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="9dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,8 +6,8 @@ import com.poly_store.model.MessageModel;
 import com.poly_store.model.NguoiDung;
 import com.poly_store.model.NguoiDungModel;
 import com.poly_store.model.SanPhamModel;
+import com.poly_store.model.ThongKeModel;
 
-import io.reactivex.Completable;
 import io.reactivex.rxjava3.core.Observable;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -24,6 +24,9 @@ public interface ApiBanHang {
 
     @GET("getsanpham.php")
     Observable<SanPhamModel> getSanPham();
+
+    @GET("thongke.php")
+    Observable<ThongKeModel> getThongKe();
 
     @POST("chitietdonhang.php")
     @FormUrlEncoded
@@ -74,7 +77,7 @@ public interface ApiBanHang {
             @Field("maDH") int maDH,
             @Field("trangThai") int trangThai
     );
-    @POST("xemdonn.php")
+    @POST("xemdon.php")
     @FormUrlEncoded
     Observable<DonHangModel> xemDonHang(
             @Field("maND") int maND
@@ -85,6 +88,12 @@ public interface ApiBanHang {
     @FormUrlEncoded
     Observable<SanPhamModel> timKiem(
             @Field("timKiem") String timKiem
+
+    );
+    @POST("gettoken.php")
+    @FormUrlEncoded
+    Observable<NguoiDungModel> gettoken(
+            @Field("status") int status
 
     );
 
@@ -136,4 +145,10 @@ public interface ApiBanHang {
     Call<MessageModel> uploadFile(
             @Part MultipartBody.Part file
     );
+
+//    @POST("gettoken.php")
+//    @FormUrlEncoded
+//    Observable<NguoiDungModel> gettoken(
+//            @Field("status") int status
+//    );
 }
