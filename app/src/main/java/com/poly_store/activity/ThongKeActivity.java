@@ -51,7 +51,7 @@ public class ThongKeActivity extends AppCompatActivity {
                         thongKeModel -> {
                             if (thongKeModel.isSuccess()) {
                                 for (int i = 0; i < thongKeModel.getResult().size(); i++) {
-                                    String tensp = thongKeModel.getResult().get(i).getTensp();
+                                    String tensp = thongKeModel.getResult().get(i).getTenSP();
                                     int tong = thongKeModel.getResult().get(i).getTong();
                                     listdata.add(new PieEntry(tong, tensp));
                                 }

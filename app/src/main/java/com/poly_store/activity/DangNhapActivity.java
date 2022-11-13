@@ -1,5 +1,6 @@
 package com.poly_store.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -105,6 +106,7 @@ public class DangNhapActivity extends AppCompatActivity {
 
 
 
+    @SuppressLint("WrongViewCast")
     private void initView(){
         Paper.init(this);
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);

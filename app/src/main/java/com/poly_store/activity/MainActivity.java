@@ -143,23 +143,33 @@ public class MainActivity extends AppCompatActivity {
                         aoThun.putExtra("maLoai",2);
                         startActivity(aoThun);
                         break;
-                    case 5:
+                    case 3:
+                        Intent aoSoMi = new Intent(MainActivity.this, AoSoMiActivity.class);
+                        aoSoMi.putExtra("maLoai",3);
+                        startActivity(aoSoMi);
+                        break;
+                    case 4:
+                        Intent quanJean = new Intent(MainActivity.this, QuanJeanActivity.class);
+                        quanJean.putExtra("maLoai",4);
+                        startActivity(quanJean);
+                        break;
+                    case 6:
                         Intent donHang = new Intent(MainActivity.this, XemDonActivity.class);
                         startActivity(donHang);
                         break;
-                    case 6:
+                    case 7:
                         Intent quanli = new Intent(getApplicationContext(), QuanLiActivity.class);
                         startActivity(quanli);
                         break;
-                    case 7:
+                    case 8:
                         Intent thongke = new Intent(getApplicationContext(), ThongKeActivity.class);
                         startActivity(thongke);
                         break;
-                    case 8:
+                    case 9:
                         Intent chat = new Intent(getApplicationContext(), UserActivity.class);
                         startActivity(chat);
                         break;
-                    case 9:
+                    case 10:
                         // xóa key nguoidung
                         Paper.book().delete("user");
                         FirebaseAuth.getInstance().signOut();
@@ -197,9 +207,9 @@ public class MainActivity extends AppCompatActivity {
                             if (loaiSPModel.isSuccess()){
                                 loaiSPList = loaiSPModel.getResult();
                                 loaiSPList.add(new LoaiSP("Quản lý",""));
+                                loaiSPList.add(new LoaiSP("Thống kê",""));
                                 loaiSPList.add(new LoaiSP("Chat",""));
                                 loaiSPList.add(new LoaiSP("Đăng xuất",""));
-                                loaiSPList.add(new LoaiSP("Thống kê",""));
                                 loaiSPAdapter = new LoaiSPAdapter(getApplicationContext(),loaiSPList);
                                 lvMain.setAdapter(loaiSPAdapter);
                             }

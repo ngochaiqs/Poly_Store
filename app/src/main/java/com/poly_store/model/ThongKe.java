@@ -1,15 +1,15 @@
 package com.poly_store.model;
 
 public class ThongKe {
-    private String tensp;
+    private String tenSP;
     private int tong;
 
-    public String getTensp() {
-        return tensp;
+    public String getTenSP() {
+        return tenSP;
     }
 
-    public void setTensp(String tensp) {
-        this.tensp = tensp;
+    public void setTenSP(String tenSP) {
+        this.tenSP = tenSP;
     }
 
     public int getTong() {
