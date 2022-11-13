@@ -6,7 +6,7 @@
     android:layout_margin="6dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
-        android:id="@+id/txtmess"
+        android:id="@+id/txtmesssend"
         android:padding="10dp"
         android:text="Nội dung chat"
         android:textColor="@color/black"
@@ -19,7 +19,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"/>
     <TextView
-        app:layout_constraintTop_toBottomOf="@+id/txtmess"
+        app:layout_constraintTop_toBottomOf="@+id/txtmesssend"
+        android:id="@+id/txttimesend"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Thời gian"
         android:textColor="@color/black"
