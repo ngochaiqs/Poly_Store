@@ -121,15 +121,15 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
-        compositeDisposable.add(apiBanHang.gettoken(1).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        nguoiDungModel -> {
-                            if (nguoiDungModel.isSuccess()){
-                                Utils.ID_RECEIVED = String.valueOf(nguoiDungModel.getResult().get(0).getMaND()) ;
-                            }
-                        }, throwable -> {}
-                ));
+//        compositeDisposable.add(apiBanHang.gettoken(1).subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(
+//                        nguoiDungModel -> {
+//                            if (nguoiDungModel.isSuccess()){
+//                                Utils.ID_RECEIVED = String.valueOf(nguoiDungModel.getResult().get(0).getMaND()) ;
+//                            }
+//                        }, throwable -> {}
+//                ));
     }
 
 
