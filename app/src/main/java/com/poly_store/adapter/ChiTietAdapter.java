@@ -1,6 +1,7 @@
 package com.poly_store.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.poly_store.R;
 import com.poly_store.model.Item;
 import com.poly_store.utils.Utils;
@@ -37,6 +39,7 @@ public class ChiTietAdapter extends RecyclerView.Adapter<ChiTietAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Item item = itemList.get(position);
+        Log.d("==/ Thông tin đơn hàng:", new Gson().toJson(itemList));
         holder.txtten.setText(item.getTenSP() + "");
         holder.txtsoluong.setText("Số lượng: " + item.getSoLuong());
         if (item.getHinhAnhSP().contains("http")){
@@ -55,7 +58,7 @@ public class ChiTietAdapter extends RecyclerView.Adapter<ChiTietAdapter.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageChitet;
-        TextView txtten, txtsoluong, txtsotien;
+        TextView txtten, txtsoluong;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imageChitet = itemView.findViewById(R.id.item_imgchitiet);

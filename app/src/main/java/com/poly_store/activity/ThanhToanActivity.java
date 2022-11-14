@@ -53,8 +53,8 @@ public class ThanhToanActivity extends AppCompatActivity {
 
     private void countItem() {
         totalItem = 0;
-        for (int i = 0; i < Utils.manggiohang.size(); i++) {
-            totalItem = totalItem + Utils.manggiohang.get(i).getSoluongGH();
+        for (int i = 0; i < Utils.mangmuahang.size(); i++) {
+            totalItem = totalItem + Utils.mangmuahang.get(i).getSoluongGH();
 
         }
     }
@@ -92,6 +92,7 @@ public class ThanhToanActivity extends AppCompatActivity {
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(nguoiDungModel -> {
+                                Log.d("===///", "soLuong: " + totalItem);
                                 Toast.makeText(getApplicationContext(), "Đặt hàng thành công!", Toast.LENGTH_SHORT).show();
                                 Utils.mangmuahang.clear();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
