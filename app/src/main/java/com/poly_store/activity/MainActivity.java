@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     SanPhamAdapter sanPhamAdapter;
     NotificationBadge badge;
     FrameLayout frameLayout;
-    ImageView imgsearch;
+    ImageView imgsearch, imageMess;
 
 
     @Override
@@ -121,6 +121,15 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+        compositeDisposable.add(apiBanHang.gettoken(1).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        nguoiDungModel -> {
+                            if (nguoiDungModel.isSuccess()){
+                                Utils.ID_RECEIVED = String.valueOf(nguoiDungModel.getResult().get(0).getMaND()) ;
+                            }
+                        }, throwable -> {}
+                ));
     }
 
 
@@ -218,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void AnhXa() {
+        imageMess = findViewById(R.id.image_mess);
         imgsearch = findViewById(R.id.imgsearch);
         toolbar = findViewById(R.id.toolbarMain);
         viewFlipper = findViewById(R.id.viewLipper);
@@ -256,6 +266,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TimKiemActivity.class);
+                startActivity(intent);
+            }
+        });
+        imageMess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
                 startActivity(intent);
             }
         });
