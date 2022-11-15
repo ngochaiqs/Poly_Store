@@ -18,15 +18,10 @@
         android:theme="@style/Theme.Poly_Store"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
-            android:name=".QuanJeanActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AoSoMiActivity"
-            android:exported="false" />
-        <activity
-            android:name=".UserActivity"
-            android:exported="false" />
+            android:name="activity.UserActivity"
+            android:exported="true" />
         <activity
             android:name=".activity.QuenMatKhauActivity"
             android:exported="true" />
@@ -65,6 +60,12 @@
             android:exported="true" />
         <activity
             android:name=".activity.AoKhoacActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.AoSoMiActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.QuanJeanActivity"
             android:exported="true" />
         <activity
             android:name=".activity.GioHangActivity"

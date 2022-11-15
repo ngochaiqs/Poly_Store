@@ -11,14 +11,25 @@
         <entry key="..\:/Do_An/app/src/main/res/layout/toolbar_main.xml" value="0.12158054711246201" />
         <entry key="..\:/Poly_Store/app/src/main/res/drawable/ic_cart_24.xml" value="0.2095" />
         <entry key="..\:/Poly_Store/app/src/main/res/layout/activity_ao_khoac.xml" value="0.1" />
+        <entry key="..\:/Poly_Store/app/src/main/res/layout/activity_ao_so_mi.xml" value="0.25" />
+        <entry key="..\:/Poly_Store/app/src/main/res/layout/activity_ao_thun.xml" value="0.25" />
         <entry key="..\:/Poly_Store/app/src/main/res/layout/activity_chat.xml" value="0.12158054711246201" />
         <entry key="..\:/Poly_Store/app/src/main/res/layout/activity_chi_tiet.xml" value="0.2" />
+        <entry key="..\:/Poly_Store/app/src/main/res/layout/activity_quan_jean.xml" value="0.25" />
         <entry key="..\:/Poly_Store/app/src/main/res/layout/activity_quen_mat_khau.xml" value="0.25" />
+        <entry key="..\:/Poly_Store/app/src/main/res/layout/activity_them_sp.xml" value="0.25" />
+        <entry key="..\:/Poly_Store/app/src/main/res/layout/activity_thong_ke.xml" value="0.18297101449275363" />
+        <entry key="..\:/Poly_Store/app/src/main/res/layout/activity_tim_kiem.xml" value="0.25" />
         <entry key="..\:/Poly_Store/app/src/main/res/layout/activity_user.xml" value="0.12158054711246201" />
+        <entry key="..\:/Poly_Store/app/src/main/res/layout/activity_xem_don.xml" value="0.25" />
         <entry key="..\:/Poly_Store/app/src/main/res/layout/dialog_donhang.xml" value="0.25" />
         <entry key="..\:/Poly_Store/app/src/main/res/layout/item_aokhoac.xml" value="0.25" />
+        <entry key="..\:/Poly_Store/app/src/main/res/layout/item_aosomi.xml" value="0.25" />
+        <entry key="..\:/Poly_Store/app/src/main/res/layout/item_aothun.xml" value="0.24895833333333334" />
         <entry key="..\:/Poly_Store/app/src/main/res/layout/item_loading.xml" value="0.25" />
+        <entry key="..\:/Poly_Store/app/src/main/res/layout/item_quanjean.xml" value="0.22192028985507245" />
         <entry key="..\:/Poly_Store/app/src/main/res/layout/item_user.xml" value="0.25" />
+        <entry key="..\:/Poly_Store/app/src/main/res/layout/notification.xml" value="0.25" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects/Poly_Store/app/src/main/res/layout/activity_user.xml" value="0.2033514492753623" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects/Poly_Store/app/src/main/res/layout/activity_xem_don.xml" value="0.1" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects/Poly_Store/app/src/main/res/layout/item_received.xml" value="0.1" />
