@@ -35,23 +35,28 @@ public class ChatActivity extends AppCompatActivity {
     FirebaseFirestore db;
     ChatAdapter adapter;
     List<ChatMessage> list;
+    int iduser;
+    String iduser_str;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        iduser = getIntent().getIntExtra("id",0); // ma nguoi nhan
+        iduser_str = String.valueOf(iduser);
+
         initView();
         initControl();
-        insertUser();
+//      insertUser();
         listenMess();
     }
 
-    private void insertUser() {
-        HashMap<String, Object> user = new HashMap<>();
-        user.put("id", Utils.nguoidung_current.getMaND());
-        user.put("username", Utils.nguoidung_current.getTenND());
-        db.collection("users").document(String.valueOf(Utils.nguoidung_current.getMaND())).set(user);
-    }
+//    private void insertUser() {
+//        HashMap<String, Object> user = new HashMap<>();
+//        user.put("id", Utils.nguoidung_current.getMaND());
+//        user.put("username", Utils.nguoidung_current.getTenND());
+//        db.collection("users").document(String.valueOf(Utils.nguoidung_current.getMaND())).set(user);
+//    }
 
     private void initControl(){
         imgSend.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +74,7 @@ public class ChatActivity extends AppCompatActivity {
         }else {
             HashMap<String, Object> message = new HashMap<>();
             message.put(Utils.SENDID, String.valueOf(Utils.nguoidung_current.getMaND()));
-            message.put(Utils.RECEIVEDID, Utils.ID_RECEIVED);
+            message.put(Utils.RECEIVEDID, iduser_str);
             message.put(Utils.MESS, str_mess);
             message.put(Utils.DATETIME, new Date());
             db.collection(Utils.PATH_CHAT).add(message);
@@ -79,11 +84,11 @@ public class ChatActivity extends AppCompatActivity {
     private void listenMess(){
         db.collection(Utils.PATH_CHAT)
                 .whereEqualTo(Utils.SENDID, String.valueOf(Utils.nguoidung_current.getMaND()))
-                .whereEqualTo(Utils.RECEIVEDID, Utils.ID_RECEIVED)
+                .whereEqualTo(Utils.RECEIVEDID, iduser_str)
                 .addSnapshotListener(eventListener);
 
         db.collection(Utils.PATH_CHAT)
-                .whereEqualTo(Utils.SENDID, Utils.ID_RECEIVED)
+                .whereEqualTo(Utils.SENDID, iduser_str)
                 .whereEqualTo(Utils.RECEIVEDID, String.valueOf(Utils.nguoidung_current.getMaND()))
                 .addSnapshotListener(eventListener);
     }

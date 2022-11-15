@@ -1,6 +1,7 @@
 package com.poly_store.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.poly_store.Interface.ItemClickListener;
 import com.poly_store.R;
+import com.poly_store.activity.ChatActivity;
 import com.poly_store.model.NguoiDung;
 
 import java.util.List;
@@ -32,8 +35,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.txtid.setText(nguoiDungList.get(position).getMaND() + " ");
-        holder.txtuser.setText(nguoiDungList.get(position).getTenND());
+        NguoiDung nguoiDung = nguoiDungList.get(position);
+        holder.txtid.setText(nguoiDung.getMaND() + " ");
+        holder.txtuser.setText(nguoiDung.getTenND());
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void conClick(View view, int pos, boolean isLongClick) {
+                if (!isLongClick){
+                    Intent intent = new Intent(context, ChatActivity.class);
+                    intent.putExtra("id",nguoiDung.getMaND());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+            }
+        });
 
     }
 
@@ -42,12 +57,23 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
         return nguoiDungList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView txtid, txtuser;
+        ItemClickListener itemClickListener;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             txtid = itemView.findViewById(R.id.iduser);
             txtuser = itemView.findViewById(R.id.tenND);
+            itemView.setOnClickListener(this);
+        }
+
+        public void setItemClickListener(ItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
+        }
+
+        @Override
+        public void onClick(View view) {
+            itemClickListener.conClick(view,getAdapterPosition(),false);
         }
     }
 }
