@@ -44,7 +44,7 @@ public class AoKhoacActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ao_khoac);
 
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
-        loai = getIntent().getIntExtra("maLoai", 2);
+        loai = getIntent().getIntExtra("maLoai", 1);
 
 
         AnhXa();
@@ -153,4 +153,3 @@ public class AoKhoacActivity extends AppCompatActivity {
         super.onDestroy();
     }
 }
-

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.poly_store.R;
 import com.poly_store.adapter.AoKhoacAdapter;
+import com.poly_store.adapter.AoSoMiAdapter;
 import com.poly_store.model.SanPham;
 import com.poly_store.retrofit.ApiBanHang;
 import com.poly_store.retrofit.RetrofitClient;
@@ -30,6 +31,7 @@ public class TimKiemActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
     AoKhoacAdapter adapterAK;
+    AoSoMiAdapter adapterASM;
     List<SanPham> sanPhamList;
     ApiBanHang apiBanHang;
     EditText edtSearch;
@@ -63,7 +65,9 @@ public class TimKiemActivity extends AppCompatActivity {
                 if (s.length() == 0) {
                     sanPhamList.clear();
                     adapterAK = new AoKhoacAdapter(getApplicationContext(), sanPhamList);
+                    adapterASM = new AoSoMiAdapter(getApplicationContext(), sanPhamList);
                     recyclerView.setAdapter(adapterAK);
+                    recyclerView.setAdapter(adapterASM);
                 } else {
                     getDataSearch(s.toString());
                 }
@@ -86,7 +90,9 @@ public class TimKiemActivity extends AppCompatActivity {
                             if (sanPhamModel.isSuccess()) {
                                 sanPhamList = sanPhamModel.getResult();
                                 adapterAK = new AoKhoacAdapter(getApplicationContext(), sanPhamList);
+                                adapterASM = new AoSoMiAdapter(getApplicationContext(), sanPhamList);
                                 recyclerView.setAdapter(adapterAK);
+                                recyclerView.setAdapter(adapterASM);
 
                             }
                         },

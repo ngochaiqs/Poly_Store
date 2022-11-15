@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.paperdb.Paper;
+import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -175,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(thongke);
                         break;
                     case 9:
-                        Intent chat = new Intent(getApplicationContext(), UserActivity.class);
+                        Intent chat = new Intent(getApplicationContext(), ChatActivity.class);
                         startActivity(chat);
                         break;
                     case 10:

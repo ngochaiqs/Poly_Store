@@ -90,7 +90,7 @@ public class AoKhoacAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return array.size();
     }
 
-    public class loadingViewHolder extends RecyclerView.ViewHolder{
+    public static class loadingViewHolder extends RecyclerView.ViewHolder{
         ProgressBar progressBar;
         public loadingViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -99,7 +99,7 @@ public class AoKhoacAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tensp, giasp, mota, idsp;
         ImageView hinhanh;
 
