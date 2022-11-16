@@ -44,7 +44,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.paperdb.Paper;
-import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -163,6 +162,10 @@ public class MainActivity extends AppCompatActivity {
                         quanJean.putExtra("maLoai",4);
                         startActivity(quanJean);
                         break;
+                    case 5:
+                        Intent lienHe = new Intent(MainActivity.this, LienHeActivity.class);
+                        startActivity(lienHe);
+                        break;
                     case 6:
                         Intent donHang = new Intent(MainActivity.this, XemDonActivity.class);
                         startActivity(donHang);
@@ -176,10 +179,18 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(thongke);
                         break;
                     case 9:
+                        Intent themNguoiDung = new Intent(getApplicationContext(), ThemNguoiDungActivity.class);
+                        startActivity(themNguoiDung);
+                        break;
+                    case 10:
                         Intent chat = new Intent(getApplicationContext(), ChatActivity.class);
                         startActivity(chat);
                         break;
-                    case 10:
+                    case 11:
+                        Intent doiMatKhau = new Intent(getApplicationContext(), DoiMatKhauActivity.class);
+                        startActivity(doiMatKhau);
+                        break;
+                    case 12:
                         // xóa key nguoidung
                         Paper.book().delete("user");
                         FirebaseAuth.getInstance().signOut();
@@ -216,10 +227,12 @@ public class MainActivity extends AppCompatActivity {
                         loaiSPModel -> {
                             if (loaiSPModel.isSuccess()){
                                 loaiSPList = loaiSPModel.getResult();
-                                loaiSPList.add(new LoaiSP("Quản lý",""));
-                                loaiSPList.add(new LoaiSP("Thống kê",""));
-                                loaiSPList.add(new LoaiSP("Chat",""));
-                                loaiSPList.add(new LoaiSP("Đăng xuất",""));
+                                loaiSPList.add(new LoaiSP("Quản lý","https://cdn-icons-png.flaticon.com/512/3429/3429694.png"));
+                                loaiSPList.add(new LoaiSP("Thống kê","https://cdn-icons-png.flaticon.com/512/2936/2936690.png"));
+                                loaiSPList.add(new LoaiSP("Thêm người dùng","https://cdn-icons-png.flaticon.com/512/4175/4175032.png"));
+                                loaiSPList.add(new LoaiSP("Chat","https://cdn-icons-png.flaticon.com/512/589/589708.png"));
+                                loaiSPList.add(new LoaiSP("Đổi mật khẩu","https://cdn-icons-png.flaticon.com/512/3585/3585217.png"));
+                                loaiSPList.add(new LoaiSP("Đăng xuất","https://cdn-icons-png.flaticon.com/512/159/159707.png"));
                                 loaiSPAdapter = new LoaiSPAdapter(getApplicationContext(),loaiSPList);
                                 lvMain.setAdapter(loaiSPAdapter);
                             }

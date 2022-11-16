@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,29 +26,23 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class DangKyActivity extends AppCompatActivity {
-    EditText email, matKhau, reMatKhau, sdt, tenND;
-    TextView txtDangNhap;
-    AppCompatButton button;
+public class ThemNguoiDungActivity extends AppCompatActivity {
+    EditText emailND, matKhauND, reMatKhauND, sdtND, tenNDND;
+    Toolbar toolbar;
+    AppCompatButton buttonThemND;
     ApiBanHang apiBanHang;
     FirebaseAuth firebaseAuth;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dang_ky);
+        setContentView(R.layout.activity_them_nguoi_dung);
         initView();
         initControll();
+        ActionToolBar();
     }
     private void initControll(){
-        txtDangNhap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), DangNhapActivity.class);
-                startActivity(intent);
-            }
-        });
-        button.setOnClickListener(new View.OnClickListener() {
+        buttonThemND.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dangKy();
@@ -57,11 +51,11 @@ public class DangKyActivity extends AppCompatActivity {
     }
 
     private void dangKy() {
-        String str_tenND = tenND.getText().toString().trim();
-        String str_email = email.getText().toString().trim();
-        String str_matKhau = matKhau.getText().toString().trim();
-        String str_reMatKhau = reMatKhau.getText().toString().trim();
-        String str_sdt = sdt.getText().toString().trim();
+        String str_tenND = tenNDND.getText().toString().trim();
+        String str_email = emailND.getText().toString().trim();
+        String str_matKhau = matKhauND.getText().toString().trim();
+        String str_reMatKhau = reMatKhauND.getText().toString().trim();
+        String str_sdt = sdtND.getText().toString().trim();
 
         if (TextUtils.isEmpty(str_tenND)) {
             Toast.makeText(getApplicationContext(), "Chưa nhập họ và tên!", Toast.LENGTH_SHORT).show();
@@ -79,7 +73,7 @@ public class DangKyActivity extends AppCompatActivity {
             if (str_matKhau.equals(str_reMatKhau)){
                 firebaseAuth = FirebaseAuth.getInstance();
                 firebaseAuth.createUserWithEmailAndPassword(str_email,str_matKhau)
-                        .addOnCompleteListener(DangKyActivity.this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(ThemNguoiDungActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
@@ -114,28 +108,38 @@ public class DangKyActivity extends AppCompatActivity {
                                 Utils.nguoidung_current.setEmail(str_email);
                                 Utils.nguoidung_current.setMatKhau(str_matKhau);
                                 Toast.makeText(getApplicationContext(),nguoiDungModel.getMessage(),Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), DangNhapActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                                 finish();
                             }else{
-                                Toast.makeText(getApplicationContext(), nguoiDungModel.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Thêm người dùng thành công!", Toast.LENGTH_SHORT).show();
                             }
                         },
                         throwable -> {
-                            Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Thêm người dùng thất bại!", Toast.LENGTH_SHORT).show();
                         }
                 ));
 
     }
+    private void ActionToolBar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
     private void initView(){
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
-        email = findViewById(R.id.email);
-        matKhau = findViewById(R.id.matKhau);
-        reMatKhau = findViewById(R.id.reMatKhau);
-        button = findViewById(R.id.btndangky);
-        sdt = findViewById(R.id.sdt);
-        tenND = findViewById(R.id.tenND);
-        txtDangNhap = findViewById(R.id.txtdangnhap);
+        emailND = findViewById(R.id.emailND);
+        matKhauND = findViewById(R.id.matKhauND);
+        reMatKhauND = findViewById(R.id.reMatKhauND);
+        buttonThemND = findViewById(R.id.btnthemND);
+        sdtND = findViewById(R.id.sdtND);
+        tenNDND = findViewById(R.id.tenNDND);
+        toolbar = findViewById(R.id.toolbarNguoiDung);
     }
 
     @Override

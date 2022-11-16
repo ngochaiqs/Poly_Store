@@ -12,7 +12,7 @@
         app:title="Chi Tiết Sản Phẩm"
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="center"
-        android:background="#B2B4C1"
+        android:background="@color/toolbar_color"
         >
         <FrameLayout
             android:id="@+id/framegiohang"
@@ -56,31 +56,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tên sản phẩm"
+                android:padding="10dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/text_color_main"
                 android:gravity="center"/>
             <TextView
                 android:id="@+id/txtgiasp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:text="@string/g_a_100_000vnd"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:gravity="center"
                 android:textColor="@android:color/holo_red_dark"/>
             <Button
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:id="@+id/btnthemvaogiohang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/th_m_v_o_gi_h_ng"
                 android:layout_marginEnd="10dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginStart="10dp"
                 android:textSize="14sp"
-                android:backgroundTint="#ff66"
+                android:background="@drawable/button_bg"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -100,8 +105,9 @@
             android:layout_marginLeft="10dp"
             android:text="@string/m_t_chi_ti_t_s_n_ph_m"
             android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color_main"
             android:textStyle="bold"
+            android:gravity="center"
             />
         <ScrollView
             android:layout_width="match_parent"
@@ -115,6 +121,7 @@
             android:layout_margin="10dp"
             android:textSize="20sp"
             android:lineHeight="40sp"
+            android:textColor="@color/text_color_main"
             />
     </LinearLayout>
 

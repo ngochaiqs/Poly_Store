@@ -4,22 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.DangKyActivity">
+    tools:context=".activity.ThemNguoiDungActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarNguoiDung"
+        app:title="Thêm người dùng"
+        android:background="@color/toolbar_color"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+    </androidx.appcompat.widget.Toolbar>
     <TextView
         android:layout_marginTop="70dp"
-        android:id="@+id/txtdangky"
+        android:id="@+id/txtthemND"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Đăng ký tài khoản"
+        android:text="Thông Tin Người Dùng"
         android:textColor="@color/text_color_main"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
     <com.google.android.material.textfield.TextInputLayout
-        app:layout_constraintTop_toBottomOf="@id/txtdangky"
+        app:layout_constraintTop_toBottomOf="@id/txtthemND"
         android:layout_marginTop="15dp"
         android:id="@+id/line1"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -27,13 +35,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Họ và tên"
-            android:id="@+id/tenND"
+            android:id="@+id/tenNDND"
             android:drawableLeft="@drawable/ic_baseline_person_24"
             android:drawablePadding="4dp"
             />
@@ -54,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
-            android:id="@+id/email"
+            android:id="@+id/emailND"
             android:inputType="textEmailAddress"
             android:drawableLeft="@drawable/ic_baseline_email_24"
             android:drawablePadding="4dp"
@@ -75,7 +82,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/matKhau"
+            android:id="@+id/matKhauND"
             android:hint="Mật khẩu"
             android:inputType="textPassword"
             android:drawableLeft="@drawable/ic_baseline_key_24"
@@ -88,17 +95,17 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
+        app:passwordToggleEnabled="true"
         android:id="@+id/line4"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nhập lại mật khẩu"
-            android:id="@+id/reMatKhau"
+            android:id="@+id/reMatKhauND"
             android:inputType="textPassword"
             android:drawableLeft="@drawable/ic_baseline_key_24"
             android:drawablePadding="4dp"
@@ -115,13 +122,12 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Số điện thoại"
-            android:id="@+id/sdt"
+            android:id="@+id/sdtND"
             android:inputType="number"
             android:drawableLeft="@drawable/ic_baseline_phone_24"
             android:drawablePadding="4dp"
@@ -129,45 +135,16 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btndangky"
+        android:id="@+id/btnthemND"
         app:layout_constraintTop_toBottomOf="@id/line5"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/button_bg"
         android:layout_marginTop="20dp"
         android:textColor="@color/text_color_main"
-        android:text="Đăng ký"
+        android:text="Đồng Ý"
         android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/btndangky"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bạn đã có tài khoản?"
-            android:textSize="16sp"
-            android:layout_marginLeft="6dp"
-            />
-
-        <TextView
-            android:id="@+id/txtdangnhap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
-            android:text="Đăng nhập"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            tools:ignore="DuplicateIds" />
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

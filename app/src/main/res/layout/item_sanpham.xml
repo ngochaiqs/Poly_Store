@@ -6,10 +6,10 @@
     app:cardCornerRadius="4dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
-    android:layout_marginLeft="20dp"
+    android:layout_marginLeft="12dp"
     android:elevation="8dp">
     <FrameLayout
-        android:background="@drawable/duong_vien_bo_goc"
+        android:background="@drawable/bg_corner_18"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:padding="2dp"
                 android:text="Áo thun"
-                android:textColor="@color/black"
+                android:textColor="@color/text_color_main"
                 android:textSize="18sp"
                 android:gravity="center"
                 android:textStyle="bold" />

@@ -72,9 +72,9 @@ public class DangNhapActivity extends AppCompatActivity {
                 String str_matKhau = matKhau.getText().toString().trim();
 
                 if (TextUtils.isEmpty(str_email)){
-                    Toast.makeText(getApplicationContext(), "Ban chua nhap Email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Vui lòng nhập Email", Toast.LENGTH_SHORT).show();
                 }else if (TextUtils.isEmpty(str_matKhau)){
-                    Toast.makeText(getApplicationContext(), "Ban chua nhap mat khau", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Vui lòng nhập mật khẩu", Toast.LENGTH_SHORT).show();
                 }else {
                     //save
 
@@ -147,6 +147,7 @@ public class DangNhapActivity extends AppCompatActivity {
                                 isLogin  = true;
                                 Paper.book().write("islogin",isLogin);
                                 Utils.nguoidung_current = nguoiDungModel.getResult().get(0);
+                                Toast.makeText(getApplicationContext(), nguoiDungModel.getMessage(), Toast.LENGTH_SHORT).show();
                                 //luu lai thong tin
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);

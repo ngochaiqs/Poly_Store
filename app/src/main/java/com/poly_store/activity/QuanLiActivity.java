@@ -1,5 +1,6 @@
 package com.poly_store.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -75,7 +77,7 @@ public class QuanLiActivity extends AppCompatActivity {
 
                             }
                         },throwable -> {
-                            Toast.makeText(getApplicationContext(),"Khong ket noi dc sever"+throwable.getMessage(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"Không kết nối được với Server"+throwable.getMessage(),Toast.LENGTH_LONG).show();
                         }
                 ));
     }
@@ -95,6 +97,8 @@ public class QuanLiActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -111,21 +115,37 @@ public class QuanLiActivity extends AppCompatActivity {
     }
 
     private void xoaSanPham() {
-        compositeDisposable.add(apiBanHang.xoaSanPham(sanPhamSuaXoa.getMaSP())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        messageModel -> {
-                            if(messageModel.isSuccess()){
-                                Toast.makeText(getApplicationContext(),messageModel.getMessage(),Toast.LENGTH_LONG).show();
-                                getSpMoi();
-                            }else {
-                                Toast.makeText(getApplicationContext(),messageModel.getMessage(),Toast.LENGTH_LONG).show();
-                            }
-                        },throwable -> {
-                            Log.d("log",throwable.getMessage());
-                        }
-                ));
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Thông báo");
+        builder.setMessage("Bạn có muốn xóa sản phẩm này không?");
+        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                compositeDisposable.add(apiBanHang.xoaSanPham(sanPhamSuaXoa.getMaSP())
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                messageModel -> {
+                                    if(messageModel.isSuccess()){
+                                        Toast.makeText(getApplicationContext(),messageModel.getMessage(),Toast.LENGTH_LONG).show();
+                                        getSpMoi();
+                                    }else {
+                                        Toast.makeText(getApplicationContext(),messageModel.getMessage(),Toast.LENGTH_LONG).show();
+                                    }
+                                },throwable -> {
+                                    Log.d("log",throwable.getMessage());
+                                }
+                        ));
+            }
+        });
+        builder.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.show();
+
     }
 
     private void suaSanPham() {

@@ -4,16 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="5dp"
     tools:context=".activity.TimKiemActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         app:title="Tìm Kiếm Sản Phẩm"
-        android:background="#B2B4C1"
+        android:background="@color/toolbar_color"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
     </androidx.appcompat.widget.Toolbar>
     <EditText
+        android:drawablePadding="10dp"
+        android:background="@drawable/bg_corner_14"
+        android:drawableStart="@drawable/ic_baseline_search_24"
         android:hint="Nhập tên sản phẩm cần tìm"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
@@ -21,7 +25,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         android:id="@+id/edtSearch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleview_search"

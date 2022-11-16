@@ -28,7 +28,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:padding="4dp"
-                android:textColor="@color/black"
+                android:textColor="@color/text_color_main"
                 android:id="@+id/item_giohang_tensp"
                 android:text="Tên sản phẩm"
                 android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                     android:text="150000 đ"
                     android:gravity="center|center_vertical"
                     android:textColor="@android:color/holo_red_light"
-                    android:textSize="16sp" />
+                    android:textSize="13sp" />
                 <ImageView
                     android:src="@drawable/ic_baseline_remove_24"
                     android:id="@+id/item_giohang_tru"
@@ -82,7 +82,7 @@
                     android:text="250000 đ"
                     android:gravity="center|center_vertical"
                     android:layout_weight="5"
-                    android:textSize="16sp"
+                    android:textSize="13sp"
                     android:layout_marginRight="10dp"
                     android:textColor="@android:color/holo_red_light"
                     android:layout_width="0dp"

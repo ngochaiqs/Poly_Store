@@ -5,11 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="5dp"
     tools:context=".activity.AoSoMiActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarAoSoMi"
         app:title="Áo Sơ Mi"
-        android:background="#B2B4C1"
+        android:background="@color/toolbar_color"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">

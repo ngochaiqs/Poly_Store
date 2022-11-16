@@ -18,9 +18,14 @@
         android:theme="@style/Theme.Poly_Store"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
         <activity
-            android:name="activity.UserActivity"
+            android:name=".activity.DoiMatKhauActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.ThemNguoiDungActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.UserActivity"
             android:exported="true" />
         <activity
             android:name=".activity.QuenMatKhauActivity"

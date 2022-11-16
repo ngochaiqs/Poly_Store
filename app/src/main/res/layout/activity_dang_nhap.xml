@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
@@ -21,62 +22,61 @@
         android:id="@+id/login_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
         android:gravity="center"
+        android:textStyle="bold"
         android:text="Đăng Nhập"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/user_email_label"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@id/line_email"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_logo" />
 
-    <TextView
-        android:id="@+id/user_email_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="32dp"
-        android:text="Email"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/email"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_label" />
-
-    <EditText
-        android:id="@+id/email"
+    <com.google.android.material.textfield.TextInputLayout
+        app:layout_constraintTop_toBottomOf="@id/login_label"
+        app:layout_constraintBottom_toTopOf="@id/line_matkhau"
+        android:id="@+id/line_email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/edit_text_bg"
-        android:padding="12dp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/password_label"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_email_label" />
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:drawableLeft="@drawable/ic_baseline_email_24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/email"
+            android:hint="Email"
+            android:drawablePadding="4dp"
+            />
 
-    <TextView
-        android:id="@+id/password_label"
-        android:layout_width="0dp"
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        app:layout_constraintTop_toBottomOf="@id/line_email"
+        app:layout_constraintBottom_toTopOf="@id/txtresetMK"
+        android:id="@+id/line_matkhau"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:text="Mật khẩu"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/matKhau"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email" />
+        app:passwordToggleEnabled="true"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/matKhau"
+            android:hint="Mật khẩu"
+            android:inputType="textPassword"
+            android:drawablePadding="4dp"
+            android:drawableLeft="@drawable/ic_baseline_key_24"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/txtresetMK"
@@ -86,34 +86,18 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:text="Quên mật khẩu?"
-        android:textColor="#2196F3"
+        android:textColor="@android:color/holo_red_light"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/matKhau"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email" />
-
-    <EditText
-        android:id="@+id/matKhau"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/edit_text_bg"
-        android:padding="12dp"
-        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/remember_me_checkbox"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_label" />
+        app:layout_constraintTop_toBottomOf="@id/line_matkhau" />
 
     <CheckBox
         android:id="@+id/remember_me_checkbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:buttonTint="#D2D2D2"
         android:text="Ghi nhớ"
@@ -123,26 +107,21 @@
         app:layout_constraintBottom_toTopOf="@+id/btndangnhap"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/matKhau" />
-
-    <Button
+        app:layout_constraintTop_toBottomOf="@id/txtresetMK" />
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btndangnhap"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/button_bg"
-        android:stateListAnimator="@null"
+        android:textColor="@color/text_color_main"
         android:text="Đăng nhập"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/or_text_label"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/remember_me_checkbox" />
+        app:layout_constraintTop_toBottomOf="@id/remember_me_checkbox"/>
 
     <View
         android:id="@+id/separator1"
@@ -256,10 +235,11 @@
             android:layout_marginEnd="32dp"
             android:gravity="start"
             android:text="Đăng ký"
-            android:textColor="#2196F3"
+            android:textColor="@android:color/holo_red_light"
             android:textSize="14sp"
             android:textStyle="bold" />
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
