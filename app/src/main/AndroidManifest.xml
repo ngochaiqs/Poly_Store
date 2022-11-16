@@ -58,9 +58,6 @@
             android:name=".activity.TimKiemActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.ResetPassActivity"
-            android:exported="true" />
-        <activity
             android:name=".activity.QuanLiActivity"
             android:exported="true" />
         <activity

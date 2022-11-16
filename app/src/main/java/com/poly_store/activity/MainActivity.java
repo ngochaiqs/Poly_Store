@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(isConnected(this)){
-            Toast.makeText(getApplicationContext(), "Đã kết nối Internet", Toast.LENGTH_SHORT).show();
             ActionViewFlipper();
             getLoaiSanPham();
             getSanPham();

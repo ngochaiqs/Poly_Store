@@ -104,6 +104,14 @@ public interface ApiBanHang {
 
     );
 
+    @POST("doimatkhau.php")
+    @FormUrlEncoded
+    Observable<NguoiDungModel> doiMatKhau(
+            @Field("email") String email,
+            @Field("matKhau") String matKhau
+
+    );
+
     @POST("themsp.php")
     @FormUrlEncoded
     Observable<MessageModel> themSP(

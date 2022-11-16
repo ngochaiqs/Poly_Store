@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="5dp"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     tools:context=".activity.TimKiemActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -15,13 +17,14 @@
         android:layout_height="?attr/actionBarSize">
     </androidx.appcompat.widget.Toolbar>
     <EditText
-        android:drawablePadding="10dp"
+        android:drawablePadding="5dp"
         android:background="@drawable/bg_corner_14"
-        android:drawableStart="@drawable/ic_baseline_search_24"
+        android:drawableRight="@drawable/ic_baseline_search_24"
         android:hint="Nhập tên sản phẩm cần tìm"
+        android:gravity="center"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         android:id="@+id/edtSearch"
         android:layout_width="match_parent"

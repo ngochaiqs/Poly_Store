@@ -1,7 +1,7 @@
 package com.poly_store.model;
 
 public class Item {
-    int maSP;
+    int maCTSP;
     String tenSP;
     int soLuong;
     String hinhAnhSP;
@@ -23,11 +23,11 @@ public class Item {
     }
 
     public int getMaSP() {
-        return maSP;
+        return maCTSP;
     }
 
     public void setMaSP(int maSP) {
-        this.maSP = maSP;
+        this.maCTSP = maSP;
     }
 
     public String getTenSP() {

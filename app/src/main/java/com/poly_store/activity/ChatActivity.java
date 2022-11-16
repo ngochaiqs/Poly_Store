@@ -1,8 +1,10 @@
 package com.poly_store.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -26,7 +28,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.logging.SimpleFormatter;
 
 public class ChatActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -57,12 +58,23 @@ public class ChatActivity extends AppCompatActivity {
 //        user.put("username", Utils.nguoidung_current.getTenND());
 //        db.collection("users").document(String.valueOf(Utils.nguoidung_current.getMaND())).set(user);
 //    }
-
+    public void hideKeyboard(View view) {
+    InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+    inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+}
     private void initControl(){
         imgSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendMessToFire();
+            }
+        });
+        edtMess.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
             }
         });
     }

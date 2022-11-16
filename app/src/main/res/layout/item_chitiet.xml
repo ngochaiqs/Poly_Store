@@ -3,17 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.cardview.widget.CardView
+    <FrameLayout
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@drawable/bg_corner_14"
         >
         <RelativeLayout
             android:layout_margin="10dp"
             android:padding="5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             >
 
             <ImageView
@@ -51,8 +50,6 @@
             </LinearLayout>
 
         </RelativeLayout>
-
-
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

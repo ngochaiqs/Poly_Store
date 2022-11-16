@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:elevation="10dp"
-    android:background="@drawable/bg_corner_14"
+    android:elevation="25dp"
     >
     <TextView
         android:text="Tình trạng đơn hàng"

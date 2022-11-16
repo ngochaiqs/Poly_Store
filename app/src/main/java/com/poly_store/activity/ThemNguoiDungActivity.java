@@ -1,9 +1,11 @@
 package com.poly_store.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -44,12 +46,55 @@ public class ThemNguoiDungActivity extends AppCompatActivity {
     private void initControll(){
         buttonThemND.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 dangKy();
             }
         });
+        emailND.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    hideKeyboard(view);
+                }
+            }
+        });
+        matKhauND.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    hideKeyboard(view);
+                }
+            }
+        });
+        reMatKhauND.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    hideKeyboard(view);
+                }
+            }
+        });
+        sdtND.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    hideKeyboard(view);
+                }
+            }
+        });
+        tenNDND.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    hideKeyboard(view);
+                }
+            }
+        });
     }
-
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
     private void dangKy() {
         String str_tenND = tenNDND.getText().toString().trim();
         String str_email = emailND.getText().toString().trim();
@@ -107,12 +152,12 @@ public class ThemNguoiDungActivity extends AppCompatActivity {
                             if (nguoiDungModel.isSuccess()){
                                 Utils.nguoidung_current.setEmail(str_email);
                                 Utils.nguoidung_current.setMatKhau(str_matKhau);
-                                Toast.makeText(getApplicationContext(),nguoiDungModel.getMessage(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"Thêm người dùng thành công!",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                                 finish();
                             }else{
-                                Toast.makeText(getApplicationContext(), "Thêm người dùng thành công!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Thêm người dùng thất bại!", Toast.LENGTH_SHORT).show();
                             }
                         },
                         throwable -> {
