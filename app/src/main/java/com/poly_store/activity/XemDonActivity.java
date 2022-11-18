@@ -1,5 +1,6 @@
 package com.poly_store.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -80,6 +81,8 @@ public class XemDonActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(XemDonActivity.this, MainActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -106,11 +109,11 @@ public class XemDonActivity extends AppCompatActivity {
         Spinner spinner = view.findViewById(R.id.spinner_dialogdonhang);
         AppCompatButton btndongy = view.findViewById(R.id.dongy_dialogdonhang);
         List<String> list = new ArrayList<>();
-        list.add("Đơn hàng đang được xử lý");
-        list.add("Đơn hàng đã chấp nhận");
-        list.add("Đơn hàng đã giao cho đơn vị vận chuyển");
+        list.add("Đang được xử lý");
+        list.add("Đang đóng gói");
+        list.add("Đã giao cho đơn vị vận chuyển");
         list.add("Thành công");
-        list.add("Đơn hàng đã hủy");
+        list.add("Đã hủy");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, list);
         spinner.setAdapter(adapter);
         spinner.setSelection(donHang.getTrangThai());

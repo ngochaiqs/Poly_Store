@@ -46,7 +46,6 @@ public class TimKiemActivity extends AppCompatActivity {
         initView();
         ActionToolBar();
     }
-
     private void initView() {
         sanPhamList = new ArrayList<>();
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);

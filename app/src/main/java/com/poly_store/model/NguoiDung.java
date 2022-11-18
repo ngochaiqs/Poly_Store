@@ -6,6 +6,7 @@ public class NguoiDung {
     String email;
     String matKhau;
     String SDT;
+    String diaChi;
     String uid;
     String token;
 
@@ -68,4 +69,11 @@ public class NguoiDung {
         this.SDT = SDT;
     }
 
+    public String getDiaChi() {
+        return diaChi;
+    }
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
+    }
 }

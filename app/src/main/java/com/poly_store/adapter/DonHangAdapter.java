@@ -14,15 +14,18 @@ import com.poly_store.Interface.ItemClickListener;
 import com.poly_store.R;
 import com.poly_store.model.DonHang;
 import com.poly_store.model.EventBus.DonHangEvent;
+import com.poly_store.model.NguoiDung;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyviewHolder> {
     private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     Context context;
     List<DonHang> listdonhang;
+    List<NguoiDung> nguoiDungList;
 
     public DonHangAdapter(Context context, List<DonHang> listdonhang){
         this.context = context;
@@ -41,11 +44,18 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyviewHo
         DonHang donHang = listdonhang.get(position);
         holder.txtdonhang.setText("Đơn hàng: " + donHang.getMaDH());
         holder.trangthai.setText(trangThaiDon(donHang.getTrangThai()));
+        holder.tvNgayDat.setText("Ngày đặt: " + donHang.getNgayTao());
+        holder.tvTenKH.setText("Tên khách hàng: " + donHang.getTenND());
+        holder.tvSDT.setText("SĐT: " + donHang.getSDT());
+        holder.tvDiaChi.setText("Địa chỉ: " + donHang.getDiaChi());
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        holder.tvTongTien.setText("Tổng tiền: " + decimalFormat.format(Double.parseDouble(donHang.getTongTien())) + " Đ");
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(
                 holder.reChitiet.getContext(),
                 LinearLayoutManager.VERTICAL,
-                true
+                false
         );
         layoutManager.setInitialPrefetchItemCount(donHang.getItem().size());
         //chi tiet adapter
@@ -92,7 +102,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyviewHo
     }
 
     public class MyviewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
-        TextView txtdonhang, trangthai;
+        TextView txtdonhang, trangthai, tvNgayDat, tvTongTien, tvTenKH, tvSDT, tvDiaChi;
         RecyclerView reChitiet;
         ItemClickListener listener;
 
@@ -100,6 +110,11 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyviewHo
             super(itemView);
             txtdonhang = itemView.findViewById(R.id.madonhang);
             trangthai = itemView.findViewById(R.id.tinhtrang);
+            tvNgayDat = itemView.findViewById(R.id.tvNgayDat);
+            tvTongTien = itemView.findViewById(R.id.tvTongTien);
+            tvTenKH = itemView.findViewById(R.id.tvTenKH);
+            tvSDT = itemView.findViewById(R.id.tvSDT);
+            tvDiaChi = itemView.findViewById(R.id.tvDiaChi);
             reChitiet = itemView.findViewById(R.id.recycleview_chitiet);
             itemView.setOnLongClickListener(this);
 

@@ -6,13 +6,14 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -45,7 +46,6 @@ import retrofit2.Response;
 public class ThemSPActivity extends AppCompatActivity {
     Spinner spinner;
     int loai=0;
-    ImageView imgcamera;
     ActivityThemSpBinding binding;
     ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -128,16 +128,6 @@ public class ThemSPActivity extends AppCompatActivity {
                 }
             }
         });
-        imgcamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImagePicker.with(ThemSPActivity.this)
-                        .crop()	    			//Cắt ảnh
-                        .compress(3072)			//Dung lượng ảnh tối đa
-                        .maxResultSize(800, 1066)	//Kích thước ảnh sẽ được chọn
-                        .start();
-            }
-        });
         binding.tenspthemsp.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -162,8 +152,64 @@ public class ThemSPActivity extends AppCompatActivity {
                 }
             }
         });
-
-
+        binding.tilHASP.setStartIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImagePicker.with(ThemSPActivity.this)
+                        .crop()	    			//Cắt ảnh
+                        .compress(3072)			//Dung lượng ảnh tối đa
+                        .maxResultSize(800, 1066)	//Kích thước ảnh sẽ được chọn
+                        .start();
+            }
+        });
+        binding.tenspthemsp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                binding.tilTenSP.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        binding.giaspthemsp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                binding.tilGiaSP.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        binding.motathemsp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                binding.tilMoTaSP.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        binding.hinhanh.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                binding.tilHASP.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
     }
 
     @Override
@@ -179,24 +225,37 @@ public class ThemSPActivity extends AppCompatActivity {
         String str_gia = binding.giaspthemsp.getText().toString().trim();
         String str_mota = binding.motathemsp.getText().toString().trim();
         String str_hinhanh = binding.hinhanh.getText().toString().trim();
-        if (TextUtils.isEmpty(str_ten) || TextUtils.isEmpty(str_gia) || TextUtils.isEmpty(str_mota) || TextUtils.isEmpty(str_hinhanh) || loai == 0 ){
-            Toast.makeText(getApplicationContext(), " Vui lòng nhập đủ thông tin", Toast.LENGTH_LONG).show();
-        }else {
+        if (TextUtils.isEmpty(str_ten)) {
+            binding.tilTenSP.setError("Vui lòng nhập tên sản phẩm!");
+        }else if(TextUtils.isEmpty(str_gia)) {
+            binding.tilGiaSP.setError("Vui lòng nhập giá sản phẩm!");
+        }else if(TextUtils.isEmpty(str_mota)) {
+            binding.tilMoTaSP.setError("Vui lòng nhập mô tả sản phẩm!");
+        }else if(TextUtils.isEmpty(str_hinhanh)) {
+            binding.tilHASP.setError("Vui lòng nhập thêm hình ảnh sản phẩm!");
+        }else if(loai == 0) {
+            Toast.makeText(this, "Vui lòng chọn loại sản phẩm!", Toast.LENGTH_SHORT).show();
+        } else {
+            final LoadingDialog loadingDialog = new LoadingDialog(ThemSPActivity.this);
+            loadingDialog.startLoadingDialog();
             compositeDisposable.add(apiBanHang.updatesp(str_ten,str_gia,str_hinhanh,str_mota,loai,sanPhamSua.getMaSP())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             messageModel -> {
                                 if (messageModel.isSuccess()){
+                                    loadingDialog.dismissDialog();
                                     Toast.makeText(getApplicationContext(), messageModel.getMessage(), Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(ThemSPActivity.this, QuanLiActivity.class);
                                     startActivity(intent);
                                 }else {
+                                    loadingDialog.dismissDialog();
                                     Toast.makeText(getApplicationContext(), messageModel.getMessage(), Toast.LENGTH_LONG).show();
                                 }
 
                             },
                             throwable -> {
+                                loadingDialog.dismissDialog();
                                 Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_LONG).show();
                             }
                     ));
@@ -208,24 +267,37 @@ public class ThemSPActivity extends AppCompatActivity {
         String str_gia = binding.giaspthemsp.getText().toString().trim();
         String str_mota = binding.motathemsp.getText().toString().trim();
         String str_hinhanh = binding.hinhanh.getText().toString().trim();
-        if (TextUtils.isEmpty(str_ten) || TextUtils.isEmpty(str_gia) || TextUtils.isEmpty(str_mota) || TextUtils.isEmpty(str_hinhanh) || loai == 0 ){
-            Toast.makeText(getApplicationContext(), " Vui lòng nhập đủ thông tin", Toast.LENGTH_LONG).show();
-        }else {
+        if (TextUtils.isEmpty(str_ten)) {
+            binding.tilTenSP.setError("Vui lòng nhập tên sản phẩm!");
+        }else if(TextUtils.isEmpty(str_gia)) {
+            binding.tilGiaSP.setError("Vui lòng nhập giá sản phẩm!");
+        }else if(TextUtils.isEmpty(str_mota)) {
+            binding.tilMoTaSP.setError("Vui lòng nhập mô tả sản phẩm!");
+        }else if(TextUtils.isEmpty(str_hinhanh)) {
+            binding.tilHASP.setError("Vui lòng nhập thêm hình ảnh sản phẩm!");
+        }else if(loai == 0) {
+            Toast.makeText(this, "Vui lòng chọn loại sản phẩm!", Toast.LENGTH_SHORT).show();
+        } else {
+            final LoadingDialog loadingDialog = new LoadingDialog(ThemSPActivity.this);
+            loadingDialog.startLoadingDialog();
             compositeDisposable.add(apiBanHang.themSP(str_ten,str_gia,str_hinhanh,str_mota,(loai))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             messageModel -> {
                                 if (messageModel.isSuccess()){
+                                    loadingDialog.dismissDialog();
                                     Toast.makeText(getApplicationContext(), messageModel.getMessage(), Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(ThemSPActivity.this, QuanLiActivity.class);
                                     startActivity(intent);
                                 }else {
+                                    loadingDialog.dismissDialog();
                                     Toast.makeText(getApplicationContext(), messageModel.getMessage(), Toast.LENGTH_LONG).show();
                                 }
 
                             },
                             throwable -> {
+                                loadingDialog.dismissDialog();
                                 Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_LONG).show();
                             }
                     ));
@@ -247,6 +319,8 @@ public class ThemSPActivity extends AppCompatActivity {
     }
 
     private void uploadMultipleFile() {
+        final LoadingDialog loadingDialog = new LoadingDialog(ThemSPActivity.this);
+        loadingDialog.startLoadingDialog();
         Uri uri = Uri.parse(mediaPath);
 
         // Map is used to multipart the file using okhttp3.RequestBody
@@ -264,10 +338,13 @@ public class ThemSPActivity extends AppCompatActivity {
                 if (serverResponse != null) {
                     if (serverResponse.isSuccess()) {
                         binding.hinhanh.setText(serverResponse.getName());
+                        loadingDialog.dismissDialog();
                     } else {
+                        loadingDialog.dismissDialog();
                         Toast.makeText(getApplicationContext(), serverResponse.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 } else {
+                    loadingDialog.dismissDialog();
                     Log.v("Response", serverResponse.toString());
                 }
             }
@@ -285,7 +362,6 @@ public class ThemSPActivity extends AppCompatActivity {
 
     private void initView(){
         spinner = findViewById(R.id.spinner_loai_themsp);
-        imgcamera = findViewById(R.id.imgcamera);
     }
     @Override
     protected void onDestroy(){

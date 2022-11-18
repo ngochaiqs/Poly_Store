@@ -9,9 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:id="@+id/toolbarchitiet"
-        app:title="Chi Tiết Sản Phẩm"
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="center"
+        app:title="Chi Tiết Sản Phẩm"
         android:background="@color/toolbar_color"
         >
         <FrameLayout

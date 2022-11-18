@@ -1,10 +1,14 @@
 package com.poly_store.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,19 +17,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.poly_store.R;
-import com.poly_store.model.NotiResponse;
-import com.poly_store.model.NotiSendData;
 import com.poly_store.retrofit.ApiBanHang;
-import com.poly_store.retrofit.ApiPushNofication;
 import com.poly_store.retrofit.RetrofitClient;
-import com.poly_store.retrofit.RetrofitClientNoti;
 import com.poly_store.utils.Utils;
 
 import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.Map;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -33,8 +32,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ThanhToanActivity extends AppCompatActivity {
     Toolbar toolbar;
-    TextView txttongtien, txtsdt, txtemail;
-    EditText edtdiachi;
+    TextView txttongtien;
+    EditText edtdiachi, edtTenND, edtSDTND;
+    TextInputLayout tilTenTT, tilSDTTT, tilDiaChiTT;
     AppCompatButton btndathang;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     ApiBanHang apiBanHang;
@@ -71,34 +71,102 @@ public class ThanhToanActivity extends AppCompatActivity {
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         tongtien = getIntent().getLongExtra("tongtien", 0);
         txttongtien.setText(decimalFormat.format(tongtien));
-        txtemail.setText(Utils.nguoidung_current.getEmail());
-        txtsdt.setText(Utils.nguoidung_current.getSDT());
+        edtSDTND.setText(Utils.nguoidung_current.getSDT());
+        edtTenND.setText(Utils.nguoidung_current.getTenND());
 
-
+        edtdiachi.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    hideKeyboard(view);
+                }
+            }
+        });
+        edtSDTND.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    hideKeyboard(view);
+                }
+            }
+        });
+        edtTenND.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (!b) {
+                    hideKeyboard(view);
+                }
+            }
+        });
+        edtTenND.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                tilTenTT.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        edtSDTND.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                tilSDTTT.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        edtdiachi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                tilDiaChiTT.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
         btndathang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String str_diachi = edtdiachi.getText().toString().trim();
+                String str_ten = edtTenND.getText().toString().trim();
+                String str_sdt = edtSDTND.getText().toString().trim();
+
                 if (TextUtils.isEmpty(str_diachi)) {
-                    Toast.makeText(getApplicationContext(), "Bạn chưa nhập địa chỉ!", Toast.LENGTH_SHORT).show();
+                    tilDiaChiTT.setError("Vui lòng nhập địa chỉ!");
+                }else if(TextUtils.isEmpty(str_ten)) {
+                    tilTenTT.setError("Vui lòng nhập tên!");
+                }else if(TextUtils.isEmpty(str_sdt)) {
+                    tilSDTTT.setError("Vui lòng nhập số điện thoại!");
                 } else {
+                    final LoadingDialog loadingDialog = new LoadingDialog(ThanhToanActivity.this);
+                    loadingDialog.startLoadingDialog();
                     String str_email = Utils.nguoidung_current.getEmail();
-                    String str_sdt = Utils.nguoidung_current.getSDT();
                     int maND = Utils.nguoidung_current.getMaND();
 
                     Log.d("==/ Thông tin thanh toán:", new Gson().toJson(Utils.mangmuahang));
-                    compositeDisposable.add(apiBanHang.datHang(str_email, str_sdt, String.valueOf(tongtien), maND, str_diachi, totalItem, new Gson().toJson(Utils.mangmuahang))
-
+                    compositeDisposable.add(apiBanHang.datHang(str_email, str_sdt, String.valueOf(tongtien), maND, str_ten, str_diachi, totalItem, new Gson().toJson(Utils.mangmuahang))
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(nguoiDungModel -> {
                                 Log.d("===///", "soLuong: " + totalItem);
+                                loadingDialog.dismissDialog();
                                 Toast.makeText(getApplicationContext(), "Đặt hàng thành công!", Toast.LENGTH_SHORT).show();
                                 Utils.mangmuahang.clear();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                                 finish();
                             }, throwable -> {
+                                loadingDialog.dismissDialog();
                                 Toast.makeText(getApplicationContext(), "Đặt hàng thất bại!", Toast.LENGTH_SHORT).show();
                             }));
                 }
@@ -140,14 +208,21 @@ public class ThanhToanActivity extends AppCompatActivity {
 //                ));
 //    }
 
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
     private void initView() {
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         toolbar = findViewById(R.id.toobar);
         txttongtien = findViewById(R.id.txttongtien);
-        txtsdt = findViewById(R.id.txtsdt);
-        txtemail = findViewById(R.id.txtemail);
+        edtSDTND = findViewById(R.id.edtSDTND);
         edtdiachi = findViewById(R.id.edtdiachi);
         btndathang = findViewById(R.id.btndathang);
+        edtTenND = findViewById(R.id.edtTenND);
+        tilTenTT = findViewById(R.id.tilTenTT);
+        tilSDTTT = findViewById(R.id.tilSDTTT);
+        tilDiaChiTT = findViewById(R.id.tilDiaChiTT);
     }
 
     @Override

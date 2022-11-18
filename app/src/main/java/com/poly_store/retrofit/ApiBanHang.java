@@ -34,6 +34,13 @@ public interface ApiBanHang {
         @Field("maLoai") int maLoai
     );
 
+    @POST("doanhThu.php")
+    @FormUrlEncoded
+    Observable<SanPhamModel> getDoanhThu(
+            @Field("tuNgay") String tuNgay,
+            @Field("denNgay") String denNgay
+    );
+
     @POST("dangky.php")
     @FormUrlEncoded
     Observable<NguoiDungModel> dangKy(
@@ -41,6 +48,7 @@ public interface ApiBanHang {
             @Field("email") String email,
             @Field("matKhau") String matKhau,
             @Field("SDT") String SDT,
+            @Field("diaChi") String diaChi,
             @Field("uid") String uid
     );
 
@@ -65,6 +73,7 @@ public interface ApiBanHang {
             @Field("SDT") String SDT,
             @Field("tongTien") String tongTien,
             @Field("maND") int maND,
+            @Field("tenND") String tenND,
             @Field("diaChi") String diaChi,
             @Field("soLuong") int soLuong,
             @Field("chiTiet") String chiTiet

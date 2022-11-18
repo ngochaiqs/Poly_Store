@@ -10,15 +10,15 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarDoiMK"
-        app:title="Mật khẩu"
         android:background="@color/toolbar_color"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
+        app:title="Mật Khẩu"
         android:layout_height="?attr/actionBarSize">
     </androidx.appcompat.widget.Toolbar>
     <TextView
         android:layout_marginTop="70dp"
-        android:id="@+id/txtthemND"
+        android:id="@+id/txtDMK"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -29,8 +29,8 @@
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
     <com.google.android.material.textfield.TextInputLayout
-        app:layout_constraintTop_toBottomOf="@id/txtthemND"
-        android:id="@+id/line2"
+        app:layout_constraintTop_toBottomOf="@id/txtDMK"
+        android:id="@+id/line2DMK"
         android:visibility="gone"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
@@ -52,15 +52,18 @@
 
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-        app:layout_constraintTop_toBottomOf="@id/line2"
-        android:id="@+id/line3"
+        app:layout_constraintTop_toBottomOf="@id/line2DMK"
+        android:id="@+id/line3DMK"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        app:passwordToggleEnabled="true"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
+        app:endIconMode="password_toggle"
+        app:errorEnabled="true"
+        app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -68,21 +71,23 @@
             android:id="@+id/edtMatKhauCu"
             android:hint="Mật khẩu cũ"
             android:inputType="textPassword"
-            android:drawableLeft="@drawable/ic_baseline_key_24"
             android:drawablePadding="4dp"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-        app:layout_constraintTop_toBottomOf="@id/line3"
-        android:id="@+id/line4"
+        app:layout_constraintTop_toBottomOf="@id/line3DMK"
+        android:id="@+id/line4DMK"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        app:passwordToggleEnabled="true"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
+        app:endIconMode="password_toggle"
+        app:errorEnabled="true"
+        app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -90,21 +95,24 @@
             android:id="@+id/edtMatKhauMoi"
             android:hint="Mật khẩu mới"
             android:inputType="textPassword"
-            android:drawableLeft="@drawable/ic_baseline_key_24"
             android:drawablePadding="4dp"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
-        app:layout_constraintTop_toBottomOf="@id/line4"
+        app:layout_constraintTop_toBottomOf="@id/line4DMK"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         app:passwordToggleEnabled="true"
-        android:id="@+id/line5"
+        android:id="@+id/line5DMK"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
+        app:endIconMode="password_toggle"
+        app:errorEnabled="true"
+        app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -112,7 +120,6 @@
             android:hint="Nhập lại mật khẩu mới"
             android:id="@+id/edtreMatKhauMoi"
             android:inputType="textPassword"
-            android:drawableLeft="@drawable/ic_baseline_key_24"
             android:drawablePadding="4dp"
             />
 
@@ -121,7 +128,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnDoiMK"
-        app:layout_constraintTop_toBottomOf="@id/line5"
+        app:layout_constraintTop_toBottomOf="@id/line5DMK"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/button_bg"

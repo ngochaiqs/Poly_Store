@@ -121,18 +121,23 @@ public class QuanLiActivity extends AppCompatActivity {
         builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                final LoadingDialog loadingDialog = new LoadingDialog(QuanLiActivity.this);
+                loadingDialog.startLoadingDialog();
                 compositeDisposable.add(apiBanHang.xoaSanPham(sanPhamSuaXoa.getMaSP())
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 messageModel -> {
                                     if(messageModel.isSuccess()){
+                                        loadingDialog.dismissDialog();
                                         Toast.makeText(getApplicationContext(),messageModel.getMessage(),Toast.LENGTH_LONG).show();
                                         getSpMoi();
                                     }else {
+                                        loadingDialog.dismissDialog();
                                         Toast.makeText(getApplicationContext(),messageModel.getMessage(),Toast.LENGTH_LONG).show();
                                     }
                                 },throwable -> {
+                                    loadingDialog.dismissDialog();
                                     Log.d("log",throwable.getMessage());
                                 }
                         ));

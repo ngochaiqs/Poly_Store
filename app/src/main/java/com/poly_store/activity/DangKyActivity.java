@@ -3,7 +3,9 @@ package com.poly_store.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -16,6 +18,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,7 +32,8 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class DangKyActivity extends AppCompatActivity {
-    EditText email, matKhau, reMatKhau, sdt, tenND;
+    EditText email, matKhau, reMatKhau, sdt, tenND, diaChi;
+    TextInputLayout line1, line2, line3, line4, line5, line6;
     TextView txtDangNhap;
     AppCompatButton button;
     ApiBanHang apiBanHang;
@@ -96,26 +100,110 @@ public class DangKyActivity extends AppCompatActivity {
                 }
             }
         });
+        diaChi.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+        email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    line2.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        matKhau.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    line3.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        reMatKhau.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    line4.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        sdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    line5.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        tenND.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    line1.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        diaChi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    line6.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
     }
-
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private void dangKy() {
         String str_tenND = tenND.getText().toString().trim();
         String str_email = email.getText().toString().trim();
         String str_matKhau = matKhau.getText().toString().trim();
         String str_reMatKhau = reMatKhau.getText().toString().trim();
         String str_sdt = sdt.getText().toString().trim();
+        String str_diaChi = diaChi.getText().toString().trim();
 
         if (TextUtils.isEmpty(str_tenND)) {
-            Toast.makeText(getApplicationContext(), "Chưa nhập họ và tên!", Toast.LENGTH_SHORT).show();
+            line1.setError("Vui lòng nhập tên người dùng!");
         }else if(TextUtils.isEmpty(str_email)) {
-            Toast.makeText(getApplicationContext(), "Chưa nhập Email!", Toast.LENGTH_SHORT).show();
+            line2.setError("Vui lòng nhập Email!");
+        }else if(!str_email.matches(emailPattern)) {
+            line2.setError("Địa chỉ Email không hợp lệ!");
         } else if (TextUtils.isEmpty(str_matKhau)) {
-            Toast.makeText(getApplicationContext(), "Chưa nhập mật khẩu!", Toast.LENGTH_SHORT).show();
+            line3.setError("Vui lòng nhập mật khẩu!");
         } else if (TextUtils.isEmpty(str_reMatKhau)) {
-            Toast.makeText(getApplicationContext(), "Chưa nhập xác nhận mật khẩu!", Toast.LENGTH_SHORT).show();
+            line4.setError("Vui lòng nhập lại mật khẩu!");
         }else if(TextUtils.isEmpty(str_sdt)) {
-            Toast.makeText(getApplicationContext(), "Chưa nhập số điện thoại!", Toast.LENGTH_SHORT).show();
-
+            line5.setError("Vui lòng nhập số điện thoại!");
+        }else if(TextUtils.isEmpty(str_diaChi)) {
+            line6.setError("Vui lòng nhập địa chỉ!");
 
         }else{
             if (str_matKhau.equals(str_reMatKhau)){
@@ -127,13 +215,13 @@ public class DangKyActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     FirebaseUser user = firebaseAuth.getCurrentUser();
                                     if (user != null) {
-                                        postData(str_tenND,str_email, str_matKhau, str_sdt, user.getUid());
+                                        postData(str_tenND,str_email, str_matKhau, str_sdt, str_diaChi, user.getUid());
 
                                     }
 
 
                                 }else {
-                                    Toast.makeText(getApplicationContext(),"Email đã tồn tại!",Toast.LENGTH_SHORT).show();
+                                    line2.setError("Email đã tồn tại");
                                 }
                             }
 
@@ -141,13 +229,17 @@ public class DangKyActivity extends AppCompatActivity {
 
 
             }else{
-                Toast.makeText(getApplicationContext(), "Mật khẩu chưa khớp!", Toast.LENGTH_SHORT).show();
+                line3.setError("Mật khẩu chưa khớp");
+                line4.setError("Mật khẩu chưa khớp");
+
             }
         }
     }
-    private void  postData(String str_tenND, String str_email, String str_matKhau, String str_sdt, String uid){
+    private void  postData(String str_tenND, String str_email, String str_matKhau, String str_sdt, String str_diaChi, String uid){
         //post data
-        compositeDisposable.add(apiBanHang.dangKy(str_tenND,str_email,str_matKhau,str_sdt, uid)
+        final LoadingDialog loadingDialog = new LoadingDialog(DangKyActivity.this);
+        loadingDialog.startLoadingDialog();
+        compositeDisposable.add(apiBanHang.dangKy(str_tenND,str_email,str_matKhau,str_sdt,str_diaChi, uid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -155,15 +247,18 @@ public class DangKyActivity extends AppCompatActivity {
                             if (nguoiDungModel.isSuccess()){
                                 Utils.nguoidung_current.setEmail(str_email);
                                 Utils.nguoidung_current.setMatKhau(str_matKhau);
+                                loadingDialog.dismissDialog();
                                 Toast.makeText(getApplicationContext(),nguoiDungModel.getMessage(),Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), DangNhapActivity.class);
                                 startActivity(intent);
                                 finish();
                             }else{
+                                loadingDialog.dismissDialog();
                                 Toast.makeText(getApplicationContext(), nguoiDungModel.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         },
                         throwable -> {
+                            loadingDialog.dismissDialog();
                             Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                 ));
@@ -181,6 +276,13 @@ public class DangKyActivity extends AppCompatActivity {
         sdt = findViewById(R.id.sdt);
         tenND = findViewById(R.id.tenND);
         txtDangNhap = findViewById(R.id.txtdangnhap);
+        diaChi = findViewById(R.id.diaChi);
+        line1 = findViewById(R.id.line1);
+        line2 = findViewById(R.id.line2);
+        line3 = findViewById(R.id.line3);
+        line4 = findViewById(R.id.line4);
+        line5 = findViewById(R.id.line5);
+        line6 = findViewById(R.id.line6);
     }
 
     @Override

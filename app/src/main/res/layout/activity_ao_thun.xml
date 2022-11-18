@@ -9,10 +9,10 @@
     tools:context=".activity.AoThunActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarAoThun"
-        app:title="Áo Thun"
         android:background="@color/toolbar_color"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
+        app:title="Áo Thun"
         android:layout_height="?attr/actionBarSize">
     </androidx.appcompat.widget.Toolbar>
     <androidx.recyclerview.widget.RecyclerView

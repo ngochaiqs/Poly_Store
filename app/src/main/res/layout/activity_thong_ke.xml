@@ -9,10 +9,10 @@
     tools:context=".activity.ThongKeActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarThongKe"
-        app:title="Thống Kê "
         android:background="@color/toolbar_color"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
+        app:title="Thống Kê"
         android:layout_height="?attr/actionBarSize">
     </androidx.appcompat.widget.Toolbar>
     <TextView

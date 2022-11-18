@@ -10,16 +10,16 @@
     tools:context=".activity.TimKiemActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        app:title="Tìm Kiếm Sản Phẩm"
         android:background="@color/toolbar_color"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
+        app:title="Tìm Kiếm Sản Phẩm"
         android:layout_height="?attr/actionBarSize">
     </androidx.appcompat.widget.Toolbar>
     <EditText
+        android:drawableEnd="@drawable/ic_baseline_search_24"
         android:drawablePadding="5dp"
         android:background="@drawable/bg_corner_14"
-        android:drawableRight="@drawable/ic_baseline_search_24"
         android:hint="Nhập tên sản phẩm cần tìm"
         android:gravity="center"
         android:layout_marginTop="10dp"

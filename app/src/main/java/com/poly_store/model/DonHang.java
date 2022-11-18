@@ -2,13 +2,15 @@ package com.poly_store.model;
 
 import java.util.List;
 
-public class DonHang {
+public class DonHang{
     int maDH;
     int maND;
+    String tenND;
     String diaChi;
     String SDT;
     String tongTien;
     int trangThai;
+    String ngayTao;
     List<Item> item;
 
     public int getTrangThai() {
@@ -65,5 +67,21 @@ public class DonHang {
 
     public void setItem(List<Item> item) {
         this.item = item;
+    }
+
+    public String getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(String ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    public String getTenND() {
+        return tenND;
+    }
+
+    public void setTenND(String tenND) {
+        this.tenND = tenND;
     }
 }

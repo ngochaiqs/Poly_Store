@@ -3,7 +3,9 @@ package com.poly_store.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -13,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.poly_store.R;
 import com.poly_store.retrofit.ApiBanHang;
 import com.poly_store.retrofit.RetrofitClient;
@@ -25,6 +28,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class DoiMatKhauActivity extends AppCompatActivity {
     EditText edtMKCu, edtMKMoi, edtReMKMoi, edtEmail;
+    TextInputLayout line3DMK, line4DMK, line5DMK;
     AppCompatButton btnDoiMatKhau;
     Toolbar toolbar;
     ApiBanHang apiBanHang;
@@ -79,6 +83,42 @@ public class DoiMatKhauActivity extends AppCompatActivity {
                 }
             }
         });
+        edtMKCu.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                line3DMK.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        edtMKMoi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                line4DMK.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+        edtReMKMoi.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                line5DMK.setError(null);
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
     }
 
     private void doiMatKhau() {
@@ -88,23 +128,28 @@ public class DoiMatKhauActivity extends AppCompatActivity {
         String str_reMatKhauMoi = edtReMKMoi.getText().toString().trim();
 
         if (TextUtils.isEmpty(str_MatKhauCu)) {
-            Toast.makeText(getApplicationContext(), "Chưa mật khẩu cũ!", Toast.LENGTH_SHORT).show();
+            line3DMK.setError("Vui lòng nhập mật khẩu cũ!");
         }else if(TextUtils.isEmpty(str_email)) {
             Toast.makeText(getApplicationContext(), "Chưa nhập Email!", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(str_matKhauMoi)) {
-            Toast.makeText(getApplicationContext(), "Chưa nhập mật khẩu mới!", Toast.LENGTH_SHORT).show();
+            line4DMK.setError("Vui lòng nhập mật khẩu mới!");
         } else if (TextUtils.isEmpty(str_reMatKhauMoi)) {
-            Toast.makeText(getApplicationContext(), "Chưa xác nhận mật khẩu mới!", Toast.LENGTH_SHORT).show();
+            line5DMK.setError("Vui lòng xác nhận mật khẩu mới!");
         }else{
             if (str_matKhauMoi.equals(str_reMatKhauMoi)){
+
                 postData(str_email,str_matKhauMoi);
             }else{
                 Toast.makeText(getApplicationContext(), "Mật khẩu mới chưa khớp!", Toast.LENGTH_SHORT).show();
+                line4DMK.setError("Mật khẩu mới chưa khớp!");
+                line5DMK.setError("Mật khẩu mới chưa khớp!");
             }
         }
     }
     private void  postData(String str_email, String str_matKhauMoi){
         //post data
+        final LoadingDialog loadingDialog = new LoadingDialog(DoiMatKhauActivity.this);
+        loadingDialog.startLoadingDialog();
         compositeDisposable.add(apiBanHang.doiMatKhau(str_email, str_matKhauMoi)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -112,15 +157,18 @@ public class DoiMatKhauActivity extends AppCompatActivity {
                         nguoiDungModel -> {
                             if (nguoiDungModel.isSuccess()){
                                 Utils.nguoidung_current.setMatKhau(str_matKhauMoi);
+                                loadingDialog.dismissDialog();
                                 Toast.makeText(getApplicationContext(),nguoiDungModel.getMessage(),Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                                 finish();
                             }else{
+                                loadingDialog.dismissDialog();
                                 Toast.makeText(getApplicationContext(), nguoiDungModel.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         },
                         throwable -> {
+                            loadingDialog.dismissDialog();
                             Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                 ));
@@ -148,6 +196,9 @@ public class DoiMatKhauActivity extends AppCompatActivity {
         edtEmail = findViewById(R.id.edtEmailDoiMK);
         btnDoiMatKhau = findViewById(R.id.btnDoiMK);
         toolbar = findViewById(R.id.toolbarDoiMK);
+        line3DMK = findViewById(R.id.line3DMK);
+        line4DMK = findViewById(R.id.line4DMK);
+        line5DMK = findViewById(R.id.line5DMK);
     }
     @Override
     protected void onDestroy(){

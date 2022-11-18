@@ -1,5 +1,6 @@
 package com.poly_store.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -58,10 +59,12 @@ public class ThongKeActivity extends AppCompatActivity {
                                 PieDataSet pieDataSet = new PieDataSet(listdata, "Thống kê");
                                 PieData data = new PieData();
                                 data.setDataSet(pieDataSet);
+                                pieDataSet.setValueTextColor(Color.BLACK);
                                 data.setValueTextSize(12f);
                                 data.setValueFormatter(new PercentFormatter(pieChart));
                                 pieDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 
+                                pieChart.setCenterTextColor(Color.BLACK);
                                 pieChart.setData(data);
                                 pieChart.animateXY(2000, 2000);
                                 pieChart.setUsePercentValues(true);

@@ -15,12 +15,13 @@
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        app:startIconDrawable="@drawable/ic_baseline_email_24"
+        app:endIconMode="clear_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:hint="Email"
             android:id="@+id/edtQuenMK"
-            android:drawableLeft="@drawable/ic_baseline_email_24"
             android:inputType="textEmailAddress"
             android:drawablePadding="10dp"
             android:layout_width="match_parent"

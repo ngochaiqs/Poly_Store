@@ -15,7 +15,8 @@
         app:title="Thanh Toán"
         android:background="@color/toolbar_color"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
+        android:layout_height="?attr/actionBarSize">
+    </androidx.appcompat.widget.Toolbar>
     <TextView
         android:layout_marginTop="30dp"
         android:layout_marginVertical="30dp"
@@ -24,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Thông Tin Đặt Hàng"
-        android:textSize="25sp"
+        android:textSize="22sp"
         android:textColor="@color/text_color_main"
         android:textStyle="bold"/>
     <androidx.cardview.widget.CardView
@@ -43,7 +44,85 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilTenTT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintTop_toBottomOf="@+id/cardview"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconDrawable="@drawable/ic_baseline_drive_file_rename_outline_24"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtTenND"
+                    android:drawablePadding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Họ và tên"
+                    android:textColorHint="@android:color/holo_red_light"
+                    >
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
 
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilSDTTT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="10"
+                app:layout_constraintTop_toBottomOf="@+id/cardview"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconDrawable="@drawable/ic_baseline_phone_24"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtSDTND"
+                    android:maxLength="10"
+                    android:drawablePadding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Số điện thoại"
+                    android:textColorHint="@android:color/holo_red_light"
+                    >
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilDiaChiTT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                app:helperText="Số nhà, tên đường, phường, quận, thành phố"
+                app:helperTextTextColor="#F4960B"
+                app:layout_constraintTop_toBottomOf="@+id/cardview"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconDrawable="@drawable/ic_baseline_edit_location_24"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtdiachi"
+                    android:drawablePadding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Địa chỉ giao hàng"
+                    android:textColorHint="@android:color/holo_red_light"
+                    >
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
             <LinearLayout
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
@@ -54,7 +133,7 @@
                 >
 
                 <ImageView
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="33dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_monetization_on_24"
@@ -62,109 +141,21 @@
                 <TextView
                     android:id="@+id/txttongtien"
                     android:layout_gravity="center"
-                    android:text="25.000"
+                    android:text="250,000 VNĐ"
                     android:textSize="20sp"
                     android:layout_marginLeft="20sp"
-                    android:textColor="@color/text_color_main"
+                    android:textColor="@color/colortext"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     />
 
-
-            </LinearLayout>
-            
-            <View
-                android:layout_marginTop="5dp"
-                android:background="@android:color/darker_gray"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                />
-
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:padding="5dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <ImageView
-                    android:src="@drawable/ic_baseline_phone_24"
-                    android:layout_marginLeft="15dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-                <TextView
-                    android:layout_marginLeft="20dp"
-                    android:id="@+id/txtsdt"
-                    android:layout_gravity="center"
-                    android:text="0911602532"
-                    android:textSize="20sp"
-                    android:textColor="@color/text_color_main"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-
-            </LinearLayout>
-            <View
-                android:layout_marginTop="5dp"
-                android:background="@android:color/darker_gray"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                />
-
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:padding="5dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <ImageView
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/ic_baseline_email_24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-                <TextView
-                    android:layout_marginLeft="20dp"
-                    android:id="@+id/txtemail"
-                    android:layout_gravity="center"
-                    android:text="example@gmail.com"
-                    android:textSize="20sp"
-                    android:textColor="@color/text_color_main"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
 
             </LinearLayout>
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputlayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@+id/cardview"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtdiachi"
-            android:drawableLeft="@drawable/ic_baseline_edit_location_24"
-            android:drawablePadding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nhập địa chỉ giao hàng"
-            android:textColorHint="@android:color/holo_red_light"
-            >
-        </com.google.android.material.textfield.TextInputEditText>
-    </com.google.android.material.textfield.TextInputLayout>
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btndathang"
@@ -177,7 +168,6 @@
         android:text="Đặt hàng"
         android:textSize="18sp"
         android:textColor="@android:color/black"
-        app:layout_constraintTop_toTopOf="@id/inputlayout"
         tools:layout_editor_absoluteX="0dp" />
 
 

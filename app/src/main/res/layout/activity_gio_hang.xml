@@ -24,9 +24,10 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/toolbar_color"
-        app:layout_constraintTop_toTopOf="parent"
         app:title="Giỏ Hàng"
-        tools:layout_editor_absoluteX="5dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="5dp" >
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleviewgiohang"
