@@ -107,7 +107,7 @@ public class ChiTietActivity extends AppCompatActivity {
             Glide.with(getApplicationContext()).load(hinh).into(imghinhanh);
         }
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        giasp.setText("Giá: " + decimalFormat.format(Double.parseDouble(sanPham.getGiaSP())) + " Đ");
+        giasp.setText("Giá: " + decimalFormat.format(Double.parseDouble(sanPham.getGiaSP())) + " đ");
     }
 
     private void initView() {

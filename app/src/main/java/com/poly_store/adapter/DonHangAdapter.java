@@ -49,7 +49,7 @@ public class  DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyviewH
         holder.tvSDT.setText("SĐT: " + donHang.getSDT());
         holder.tvDiaChi.setText("Địa chỉ: " + donHang.getDiaChi());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.tvTongTien.setText("Tổng tiền: " + decimalFormat.format(Double.parseDouble(donHang.getTongTien())) + " Đ");
+        holder.tvTongTien.setText("Tổng tiền: " + decimalFormat.format(Double.parseDouble(donHang.getTongTien())) + " đ");
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(

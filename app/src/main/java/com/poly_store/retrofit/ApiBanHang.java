@@ -1,5 +1,6 @@
 package com.poly_store.retrofit;
 
+import com.poly_store.model.DoanhThuModel;
 import com.poly_store.model.DonHangModel;
 import com.poly_store.model.LoaiSPModel;
 import com.poly_store.model.MessageModel;
@@ -36,7 +37,7 @@ public interface ApiBanHang {
 
     @POST("doanhThu.php")
     @FormUrlEncoded
-    Observable<SanPhamModel> getDoanhThu(
+    Observable<DoanhThuModel> getDoanhThu(
             @Field("tuNgay") String tuNgay,
             @Field("denNgay") String denNgay
     );

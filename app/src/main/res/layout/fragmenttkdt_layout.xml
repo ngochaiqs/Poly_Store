@@ -1,14 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:gravity="center"
+    android:layout_margin="5dp"
     android:layout_height="match_parent">
-    <TextView
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilTuNgay"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarThemSP"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        app:startIconDrawable="@drawable/ic_baseline_date_range_24"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:hint="Từ ngày"
+            android:id="@+id/edtTuNgay"
+            android:inputType="date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilDenNgay"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarThemSP"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        app:startIconDrawable="@drawable/ic_baseline_date_range_24"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:hint="Đến ngày"
+            android:id="@+id/edtDenNgay"
+            android:inputType="date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDoanhThu"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_loai_themsp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="20dp"
+        android:text="Đồng ý"
+        android:background="@drawable/button_bg"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000" />
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thong ke DT"
-        android:gravity="center"
-        android:textSize="30dp"
-        />
+        android:orientation="vertical">
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tổng doanh thu: "
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tvDoanhThu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="20sp"
+            android:textColor="@color/colortext"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"/>
+    </LinearLayout>
+
 </LinearLayout>

@@ -104,7 +104,6 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        app:passwordToggleEnabled="true"
         android:id="@+id/line5DMK"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
