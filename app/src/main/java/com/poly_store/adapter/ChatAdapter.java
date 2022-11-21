@@ -14,6 +14,7 @@ import com.poly_store.model.ChatMessage;
 
 import java.util.List;
 
+
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private List<ChatMessage> chatMessageList;
@@ -86,3 +87,4 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 }
+
