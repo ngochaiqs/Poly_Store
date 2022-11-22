@@ -111,7 +111,7 @@ public class XemDonActivity extends AppCompatActivity {
         List<String> list = new ArrayList<>();
         list.add("Đang được xử lý");
         list.add("Đang đóng gói");
-        list.add("Đã giao cho đơn vị vận chuyển");
+        list.add("Giao cho đơn vị vận chuyển");
         list.add("Thành công");
         list.add("Đã hủy");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, list);
@@ -197,21 +197,22 @@ public class XemDonActivity extends AppCompatActivity {
         String result = "";
         switch (status){
             case 0:
-                result = "Đơn hàng đang được xử lí";
+                result = "Đơn hàng đang được xử lý";
                 break;
             case 1:
-                result = "Đơn hàng đã chấp nhận";
+                result = "Đơn hàng đang được đóng gói";
                 break;
             case 2:
                 result = "Đơn hàng đã giao cho đơn vị vận chuyển";
                 break;
             case 3:
-                result = "Thành công";
+                result = "Đơn hàng đã giao thành công";
                 break;
             case 4:
-                result = "Đơn hàng đã huỷ";
+                result = "Đơn hàng đã hủy";
                 break;
         }
+
         return result;
     }
 
