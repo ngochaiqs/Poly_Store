@@ -82,6 +82,8 @@
         app:startIconDrawable="@drawable/ic_baseline_lock_24"
         app:errorEnabled="true"
         app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+        app:helperText="* Tối thiểu 6 ký tự"
+        app:helperTextTextColor="#F4960B"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -106,6 +108,8 @@
         android:layout_height="wrap_content"
         app:errorEnabled="true"
         app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+        app:helperText="* Tối thiểu 6 ký tự"
+        app:helperTextTextColor="#F4960B"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -150,7 +154,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="32dp"
         android:id="@+id/line6"
-        app:helperText="Số nhà, tên đường, phường, quận, thành phố"
+        app:helperText="* Số nhà, tên đường, phường, quận, thành phố"
         app:helperTextTextColor="#F4960B"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"

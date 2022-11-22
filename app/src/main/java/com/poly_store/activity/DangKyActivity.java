@@ -221,7 +221,7 @@ public class DangKyActivity extends AppCompatActivity {
 
 
                                 }else {
-                                    line2.setError("Email đã tồn tại");
+                                    line2.setError("Email đã tồn tại!");
                                 }
                             }
 
@@ -229,8 +229,8 @@ public class DangKyActivity extends AppCompatActivity {
 
 
             }else{
-                line3.setError("Mật khẩu chưa khớp");
-                line4.setError("Mật khẩu chưa khớp");
+                line3.setError("Mật khẩu chưa khớp!");
+                line4.setError("Mật khẩu chưa khớp!");
 
             }
         }

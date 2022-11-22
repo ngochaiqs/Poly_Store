@@ -148,10 +148,10 @@ public class XemDonActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         messageModel -> {
+                            pushNotiToUser();
                             getOrder();
                             Toast.makeText(this, messageModel.getMessage(), Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
-                            pushNotiToUser();
                         },
                         throwable -> {
 
@@ -170,6 +170,7 @@ public class XemDonActivity extends AppCompatActivity {
                                     Map<String, String> data = new HashMap<>();
                                     data.put("title", "Thông báo từ admin");
                                     data.put("body", trangThaiDon(tinhtrang));
+                                    Log.d("===//", "pushNotiToUser: " + trangThaiDon(tinhtrang));
                                     NotiSendData notiSendData = new NotiSendData(nguoiDungModel.getResult().get(i).getToken(), data);
                                     ApiPushNofication apiPushNofication = RetrofitClientNoti.getInstance().create(ApiPushNofication.class);
                                     compositeDisposable.add(apiPushNofication.sendNofitication(notiSendData)

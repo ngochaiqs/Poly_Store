@@ -8,48 +8,52 @@
     android:focusableInTouchMode="true"
     android:layout_margin="5dp"
     tools:context=".activity.QuenMatKhauActivity">
-    <com.google.android.material.textfield.TextInputLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarQuenMK"
+        android:background="@color/toolbar_color"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        app:title="Quên Mật Khẩu"
+        android:layout_height="?attr/actionBarSize">
+    </androidx.appcompat.widget.Toolbar>
+    <com.google.android.material.textfield.TextInputLayout
+        app:layout_constraintTop_toBottomOf="@id/toolbarQuenMK"
         android:id="@+id/line1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="32dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:startIconDrawable="@drawable/ic_baseline_email_24"
         app:endIconMode="clear_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:inputType="textEmailAddress"
+        app:errorEnabled="true"
+        app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+        >
         <com.google.android.material.textfield.TextInputEditText
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="Email"
             android:id="@+id/edtQuenMK"
             android:inputType="textEmailAddress"
-            android:drawablePadding="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:drawablePadding="4dp"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnQuenMK"
         app:layout_constraintTop_toBottomOf="@+id/line1"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
         android:layout_marginTop="15dp"
         android:gravity="center"
         android:text="Quên mật khẩu"
         android:textColor="@color/text_color_main"
         android:background="@drawable/button_bg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <ProgressBar
-        android:id="@+id/progressbar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
