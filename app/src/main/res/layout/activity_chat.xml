@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
+    android:layout_margin="5dp"
     android:focusableInTouchMode="true"
     tools:context=".activity.ChatActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarChat"
-        android:background="@color/toolbar_color"
+        android:background="@drawable/bg_toolbar"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         app:title="Chat"
