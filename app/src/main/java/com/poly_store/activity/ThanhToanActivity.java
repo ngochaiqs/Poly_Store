@@ -70,7 +70,7 @@ public class ThanhToanActivity extends AppCompatActivity {
         });
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         tongtien = getIntent().getLongExtra("tongtien", 0);
-        txttongtien.setText(decimalFormat.format(tongtien));
+        txttongtien.setText(decimalFormat.format(tongtien) + " đ");
         edtSDTND.setText(Utils.nguoidung_current.getSDT());
         edtTenND.setText(Utils.nguoidung_current.getTenND());
 
