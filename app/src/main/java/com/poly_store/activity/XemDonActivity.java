@@ -167,10 +167,11 @@ public class XemDonActivity extends AppCompatActivity {
                         nguoiDungModel ->{
                             if (nguoiDungModel.isSuccess()){
                                 for (int i =0; i<nguoiDungModel.getResult().size(); i++){
+                                    Log.d("===//", "Token User nhận thông báo: " + nguoiDungModel.getResult().get(i).getToken());
                                     Map<String, String> data = new HashMap<>();
-                                    data.put("title", "Thông báo từ admin");
-                                    data.put("body", trangThaiDon(tinhtrang));
-                                    Log.d("===//", "pushNotiToUser: " + trangThaiDon(tinhtrang));
+                                    data.put("title", "Thông báo từ Poly Store!");
+                                    data.put("body", "Đơn hàng của bạn "+ trangThaiDon(tinhtrang) + " Cảm ơn bạn đã mua hàng tại Poly Store!");
+                                    Log.d("===//", "Tình trạng: " + trangThaiDon(tinhtrang));
                                     NotiSendData notiSendData = new NotiSendData(nguoiDungModel.getResult().get(i).getToken(), data);
                                     ApiPushNofication apiPushNofication = RetrofitClientNoti.getInstance().create(ApiPushNofication.class);
                                     compositeDisposable.add(apiPushNofication.sendNofitication(notiSendData)
@@ -197,19 +198,19 @@ public class XemDonActivity extends AppCompatActivity {
         String result = "";
         switch (status){
             case 0:
-                result = "Đơn hàng đang được xử lý";
+                result = "đang được xử lý!";
                 break;
             case 1:
-                result = "Đơn hàng đang được đóng gói";
+                result = "đang được đóng gói!";
                 break;
             case 2:
-                result = "Đơn hàng đã giao cho đơn vị vận chuyển";
+                result = "đã được giao cho đơn vị vận chuyển!";
                 break;
             case 3:
-                result = "Đơn hàng đã giao thành công";
+                result = "đã giao thành công!";
                 break;
             case 4:
-                result = "Đơn hàng đã hủy";
+                result = "đã hủy!";
                 break;
         }
 
