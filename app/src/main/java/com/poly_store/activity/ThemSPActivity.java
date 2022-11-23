@@ -246,7 +246,7 @@ public class ThemSPActivity extends AppCompatActivity {
                                 if (messageModel.isSuccess()){
                                     loadingDialog.dismissDialog();
                                     Toast.makeText(getApplicationContext(), messageModel.getMessage(), Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(ThemSPActivity.this, QuanLiActivity.class);
+                                    Intent intent = new Intent(ThemSPActivity.this, MainActivity.class);
                                     startActivity(intent);
                                 }else {
                                     loadingDialog.dismissDialog();
@@ -288,7 +288,7 @@ public class ThemSPActivity extends AppCompatActivity {
                                 if (messageModel.isSuccess()){
                                     loadingDialog.dismissDialog();
                                     Toast.makeText(getApplicationContext(), messageModel.getMessage(), Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(ThemSPActivity.this, QuanLiActivity.class);
+                                    Intent intent = new Intent(ThemSPActivity.this, MainActivity.class);
                                     startActivity(intent);
                                 }else {
                                     loadingDialog.dismissDialog();

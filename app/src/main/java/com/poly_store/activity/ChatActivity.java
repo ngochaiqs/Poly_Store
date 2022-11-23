@@ -50,9 +50,23 @@ public class ChatActivity extends AppCompatActivity {
         initControl();
 //      insertUser();
         listenMess();
+        ActionToolbar();
     }
 
-//    private void insertUser() {
+    private void ActionToolbar() {
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbarChat);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+
+    //    private void insertUser() {
 //        HashMap<String, Object> user = new HashMap<>();
 //        user.put("id", Utils.nguoidung_current.getMaND());
 //        user.put("username", Utils.nguoidung_current.getTenND());

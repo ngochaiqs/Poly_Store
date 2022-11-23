@@ -1,15 +1,15 @@
 package com.poly_store.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -17,6 +17,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -24,7 +26,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,12 +34,17 @@ import com.nex3z.notificationbadge.NotificationBadge;
 import com.poly_store.R;
 import com.poly_store.adapter.LoaiSPAdapter;
 import com.poly_store.adapter.SanPhamAdapter;
+import com.poly_store.model.EventBus.SuaXoaEvent;
 import com.poly_store.model.LoaiSP;
 import com.poly_store.model.NguoiDung;
 import com.poly_store.model.SanPham;
 import com.poly_store.retrofit.ApiBanHang;
 import com.poly_store.retrofit.RetrofitClient;
 import com.poly_store.utils.Utils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
     SanPhamAdapter sanPhamAdapter;
     NotificationBadge badge;
     FrameLayout frameLayout;
-    ImageView imgsearch, imageMess;
+    ImageView imgsearch, imageMess, img_them;
+    SanPham sanPhamSuaXoa;
 
 
     @Override
@@ -78,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         }
         getToken();
         AnhXa();
-        ActionViewFlipper();
+        //ActionViewFlipper();
         ActionBar();
 
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
@@ -89,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(isConnected(this)){
-            ActionViewFlipper();
+            //ActionViewFlipper();
             getLoaiSanPham();
             getSanPham();
             getClickMenu();
@@ -142,54 +149,30 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(trangChu);
                         break;
                     case 1:
-                        Intent aoKhoac = new Intent(MainActivity.this, AoKhoacActivity.class);
-                        aoKhoac.putExtra("maLoai",1);
-                        startActivity(aoKhoac);
-                        break;
-                    case 2:
-                        Intent aoThun = new Intent(MainActivity.this, AoThunActivity.class);
-                        aoThun.putExtra("maLoai",2);
-                        startActivity(aoThun);
-                        break;
-                    case 3:
-                        Intent aoSoMi = new Intent(MainActivity.this, AoSoMiActivity.class);
-                        aoSoMi.putExtra("maLoai",3);
-                        startActivity(aoSoMi);
-                        break;
-                    case 4:
-                        Intent quanJean = new Intent(MainActivity.this, QuanJeanActivity.class);
-                        quanJean.putExtra("maLoai",4);
-                        startActivity(quanJean);
-                        break;
-                    case 5:
-                        Intent lienHe = new Intent(MainActivity.this, LienHeActivity.class);
-                        startActivity(lienHe);
-                        break;
-                    case 6:
                         Intent donHang = new Intent(MainActivity.this, XemDonActivity.class);
                         startActivity(donHang);
                         break;
-                    case 7:
-                        Intent quanli = new Intent(getApplicationContext(), QuanLiActivity.class);
-                        startActivity(quanli);
-                        break;
-                    case 8:
+//                    case 2:
+//                        Intent quanli = new Intent(getApplicationContext(), QuanLiActivity.class);
+//                        startActivity(quanli);
+//                        break;
+                    case 2:
                         Intent thongke = new Intent(getApplicationContext(), ThongKeActivity.class);
                         startActivity(thongke);
                         break;
-                    case 9:
+                    case 3:
                         Intent themNguoiDung = new Intent(getApplicationContext(), ThemNguoiDungActivity.class);
                         startActivity(themNguoiDung);
                         break;
-                    case 10:
+                    case 4:
                         Intent chat = new Intent(getApplicationContext(), ChatActivity.class);
                         startActivity(chat);
                         break;
-                    case 11:
+                    case 5:
                         Intent doiMatKhau = new Intent(getApplicationContext(), DoiMatKhauActivity.class);
                         startActivity(doiMatKhau);
                         break;
-                    case 12:
+                    case 6:
                         // xóa key nguoidung
                         Paper.book().delete("user");
                         FirebaseAuth.getInstance().signOut();
@@ -225,8 +208,10 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(
                         loaiSPModel -> {
                             if (loaiSPModel.isSuccess()){
-                                loaiSPList = loaiSPModel.getResult();
-                                loaiSPList.add(new LoaiSP("Quản lý","https://cdn-icons-png.flaticon.com/512/3429/3429694.png"));
+//                                loaiSPList = loaiSPModel.getResult();
+                                loaiSPList.add(new LoaiSP("Trang chủ","https://cdn-icons-png.flaticon.com/512/263/263115.png"));
+                                loaiSPList.add(new LoaiSP("Đơn hàng","https://cdn-icons-png.flaticon.com/512/3624/3624080.png"));
+                                //loaiSPList.add(new LoaiSP("Quản lý","https://cdn-icons-png.flaticon.com/512/3429/3429694.png"));
                                 loaiSPList.add(new LoaiSP("Thống kê","https://cdn-icons-png.flaticon.com/512/2936/2936690.png"));
                                 loaiSPList.add(new LoaiSP("Thêm người dùng","https://cdn-icons-png.flaticon.com/512/4175/4175032.png"));
                                 loaiSPList.add(new LoaiSP("Chat","https://cdn-icons-png.flaticon.com/512/589/589708.png"));
@@ -240,10 +225,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void AnhXa() {
+        img_them = findViewById(R.id.img_them);
         imageMess = findViewById(R.id.image_mess);
         imgsearch = findViewById(R.id.imgsearch);
         toolbar = findViewById(R.id.toolbarMain);
-        viewFlipper = findViewById(R.id.viewLipper);
+        //viewFlipper = findViewById(R.id.viewLipper);
         recyclerViewMain = findViewById(R.id.recyclerviewMain);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerViewMain.setLayoutManager(layoutManager);
@@ -267,7 +253,13 @@ public class MainActivity extends AppCompatActivity {
             }
             badge.setText(String.valueOf(totalItem));
         }
-
+        img_them.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ThemSPActivity.class);
+                startActivity(intent);
+            }
+        });
         frameLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -303,24 +295,104 @@ public class MainActivity extends AppCompatActivity {
      badge.setText(String.valueOf(totalItem));
     }
 
-    private void ActionViewFlipper(){
-        List<String> mangquangcao = new ArrayList<>();
-        mangquangcao.add("https://360boutique.vn/wp-content/uploads/2022/06/Web.jpg");
-        mangquangcao.add("https://360boutique.vn/wp-content/uploads/2022/07/Banner-web.jpg");
-        mangquangcao.add("https://360boutique.vn/wp-content/uploads/2022/06/web-1.jpg");
-        for (int i = 0; i<mangquangcao.size(); i++){
-            ImageView imageView = new ImageView(getApplicationContext());
-            Glide.with(getApplicationContext()).load(mangquangcao.get(i)).into(imageView);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            viewFlipper.addView(imageView);
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        if(item.getTitle().equals("Sửa")){
+            suaSanPham();
+        }else if(item.getTitle().equals("Xóa")){
+            xoaSanPham();
         }
-        viewFlipper.setFlipInterval(3000);
-        viewFlipper.setAutoStart(true);
-        Animation slide_in = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_in_right);
-        Animation slide_out = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_out_right);
-        viewFlipper.setInAnimation(slide_in);
-        viewFlipper.setOutAnimation(slide_out);
+        return super.onContextItemSelected(item);
     }
+
+    private void xoaSanPham() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Thông báo");
+        builder.setMessage("Bạn có muốn xóa sản phẩm này không?");
+        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                final LoadingDialog loadingDialog = new LoadingDialog(MainActivity.this);
+                loadingDialog.startLoadingDialog();
+                compositeDisposable.add(apiBanHang.xoaSanPham(sanPhamSuaXoa.getMaSP())
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                messageModel -> {
+                                    if(messageModel.isSuccess()){
+                                        loadingDialog.dismissDialog();
+                                        Toast.makeText(getApplicationContext(),messageModel.getMessage(),Toast.LENGTH_LONG).show();
+                                        getSanPham();
+                                    }else {
+                                        loadingDialog.dismissDialog();
+                                        Toast.makeText(getApplicationContext(),messageModel.getMessage(),Toast.LENGTH_LONG).show();
+                                    }
+                                },throwable -> {
+                                    loadingDialog.dismissDialog();
+                                    Log.d("log",throwable.getMessage());
+                                }
+                        ));
+            }
+        });
+        builder.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.show();
+
+    }
+
+    private void suaSanPham() {
+        Intent intent = new Intent(getApplicationContext(),ThemSPActivity.class);
+        intent.putExtra("sua",sanPhamSuaXoa);
+        startActivity(intent);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        compositeDisposable.clear();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    public void evenSuaXoa(SuaXoaEvent event){
+        if(event != null ){
+            sanPhamSuaXoa = event.getSanPham();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+//    private void ActionViewFlipper(){
+//        List<String> mangquangcao = new ArrayList<>();
+//        mangquangcao.add("https://360boutique.vn/wp-content/uploads/2022/06/Web.jpg");
+//        mangquangcao.add("https://360boutique.vn/wp-content/uploads/2022/07/Banner-web.jpg");
+//        mangquangcao.add("https://360boutique.vn/wp-content/uploads/2022/06/web-1.jpg");
+//        for (int i = 0; i<mangquangcao.size(); i++){
+//            ImageView imageView = new ImageView(getApplicationContext());
+//            Glide.with(getApplicationContext()).load(mangquangcao.get(i)).into(imageView);
+//            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+//            viewFlipper.addView(imageView);
+//        }
+//        viewFlipper.setFlipInterval(3000);
+//        viewFlipper.setAutoStart(true);
+//        Animation slide_in = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_in_right);
+//        Animation slide_out = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_out_right);
+//        viewFlipper.setInAnimation(slide_in);
+//        viewFlipper.setOutAnimation(slide_out);
+//    }
 
     private void ActionBar(){
         setSupportActionBar(toolbar);

@@ -10,7 +10,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarNguoiDung"
-        android:background="@color/toolbar_color"
+        android:background="@drawable/bg_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:title="Thêm Người Dùng"
