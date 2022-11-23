@@ -77,19 +77,19 @@ public class  DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyviewH
         String result = "";
         switch (status){
             case 0:
-                result = "Đơn hàng đang được xử lý";
+                result = "Đơn hàng đang được xử lý!";
                 break;
             case 1:
-                result = "Đơn hàng đang được đóng gói";
+                result = "Đơn hàng đang được đóng gói!";
                 break;
             case 2:
-                result = "Đơn hàng đã giao cho đơn vị vận chuyển";
+                result = "Đơn hàng đã giao cho đơn vị vận chuyển!";
                 break;
             case 3:
-                result = "Đơn hàng đã giao thành công";
+                result = "Đơn hàng đã giao thành công!";
                 break;
             case 4:
-                result = "Đơn hàng đã hủy";
+                result = "Đơn hàng đã hủy!";
                 break;
         }
 
