@@ -36,7 +36,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         NguoiDung nguoiDung = nguoiDungList.get(position);
-        holder.txtid.setText(nguoiDung.getMaND() + " ");
+        holder.txtid.setText( "ID: " + nguoiDung.getMaND());
         holder.txtuser.setText(nguoiDung.getTenND());
         holder.setItemClickListener(new ItemClickListener() {
             @Override

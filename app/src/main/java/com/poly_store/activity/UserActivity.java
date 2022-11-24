@@ -1,20 +1,19 @@
 package com.poly_store.activity;
 
+import android.os.Bundle;
+import android.view.View;
+import androidx.appcompat.widget.Toolbar;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.auth.User;
 import com.poly_store.R;
 import com.poly_store.adapter.UserAdapter;
 import com.poly_store.model.NguoiDung;
@@ -47,7 +46,7 @@ public class UserActivity extends AppCompatActivity {
                             List<NguoiDung> nguoidunglist = new ArrayList<>();
                             for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
                                 NguoiDung nguoiDung = new NguoiDung();
-                                nguoiDung.setMaND(documentSnapshot.getLong("Ma").intValue());
+                                nguoiDung.setMaND(documentSnapshot.getLong("id").intValue());
                                 nguoiDung.setTenND(documentSnapshot.getString("username"));
                                 nguoidunglist.add(nguoiDung);
                             }
@@ -71,11 +70,8 @@ public class UserActivity extends AppCompatActivity {
         });
     }
 
-    private void setSupportActionBar(Toolbar toolbar) {
-    }
-
     private void initView() {
-        toolbar = findViewById(R.id.toobar);
+        toolbar = findViewById(R.id.toobarChatAdmin);
         recyclerView = findViewById(R.id.recycleview_user);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

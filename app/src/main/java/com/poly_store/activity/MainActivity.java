@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(themNguoiDung);
                         break;
                     case 4:
-                        Intent chat = new Intent(getApplicationContext(), ChatActivity.class);
+                        Intent chat = new Intent(getApplicationContext(), UserActivity.class);
                         startActivity(chat);
                         break;
                     case 5:

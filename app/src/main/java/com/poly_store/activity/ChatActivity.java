@@ -3,6 +3,7 @@ package com.poly_store.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -19,6 +20,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.poly_store.R;
 import com.poly_store.adapter.ChatAdapter;
 import com.poly_store.model.ChatMessage;
+import com.poly_store.model.NotiSendData;
+import com.poly_store.retrofit.ApiBanHang;
+import com.poly_store.retrofit.ApiPushNofication;
+import com.poly_store.retrofit.RetrofitClientNoti;
 import com.poly_store.utils.Utils;
 
 import java.text.SimpleDateFormat;
@@ -28,6 +33,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ChatActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -38,6 +48,8 @@ public class ChatActivity extends AppCompatActivity {
     List<ChatMessage> list;
     int iduser;
     String iduser_str;
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
+    ApiBanHang apiBanHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +60,7 @@ public class ChatActivity extends AppCompatActivity {
 
         initView();
         initControl();
-//      insertUser();
+        insertUser();
         listenMess();
         ActionToolbar();
     }
@@ -66,12 +78,12 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-    //    private void insertUser() {
-//        HashMap<String, Object> user = new HashMap<>();
-//        user.put("id", Utils.nguoidung_current.getMaND());
-//        user.put("username", Utils.nguoidung_current.getTenND());
-//        db.collection("users").document(String.valueOf(Utils.nguoidung_current.getMaND())).set(user);
-//    }
+        private void insertUser() {
+        HashMap<String, Object> user = new HashMap<>();
+        user.put("id", Utils.nguoidung_current.getMaND());
+        user.put("username", Utils.nguoidung_current.getTenND());
+        db.collection("users").document(String.valueOf(Utils.nguoidung_current.getMaND())).set(user);
+    }
     public void hideKeyboard(View view) {
     InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
     inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
@@ -98,6 +110,7 @@ public class ChatActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(str_mess)){
 
         }else {
+//            thongBaoDenND();
             HashMap<String, Object> message = new HashMap<>();
             message.put(Utils.SENDID, String.valueOf(Utils.nguoidung_current.getMaND()));
             message.put(Utils.RECEIVEDID, iduser_str);
@@ -105,6 +118,7 @@ public class ChatActivity extends AppCompatActivity {
             message.put(Utils.DATETIME, new Date());
             db.collection(Utils.PATH_CHAT).add(message);
             edtMess.setText("");
+
         }
     }
     private void listenMess(){
@@ -146,10 +160,43 @@ public class ChatActivity extends AppCompatActivity {
     };
 
     private String format_date(Date date){
-        return new SimpleDateFormat("MMM dd, yyyy- hh:mm a", Locale.getDefault()).format(date);
+        return new SimpleDateFormat("hh:mm a- dd MMM yyyy", Locale.getDefault()).format(date);
     }
 
+    private void thongBaoDenND() {
+        //get token
+        compositeDisposable.add(apiBanHang.getTokenChat(0, Utils.nguoidung_current.getMaND())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        nguoiDungModel ->{
+                            if (nguoiDungModel.isSuccess()){
+                                for (int i =0; i<nguoiDungModel.getResult().size(); i++){
+                                    Log.d("===//", "Token User nhận thông báo: " + nguoiDungModel.getResult().get(i).getToken());
+                                    Map<String, String> data = new HashMap<>();
+                                    data.put("title", "Thông báo từ Poly Store!");
+                                    data.put("body", "Bạn nhận được tin nhắn mới từ Poly Store!");
+                                    NotiSendData notiSendData = new NotiSendData(nguoiDungModel.getResult().get(i).getToken(), data);
+                                    ApiPushNofication apiPushNofication = RetrofitClientNoti.getInstance().create(ApiPushNofication.class);
+                                    compositeDisposable.add(apiPushNofication.sendNofitication(notiSendData)
+                                            .subscribeOn(Schedulers.io())
+                                            .observeOn(AndroidSchedulers.mainThread())
+                                            .subscribe(
+                                                    notiResponse -> {
 
+                                                    },
+                                                    throwable -> {
+                                                        Log.d("logg", throwable.getMessage());
+                                                    }
+                                            ));
+                                }
+                            }
+                        },
+                        throwable -> {
+                            Log.d("loggg", throwable.getMessage());
+                        }
+                ));
+    }
     private void initView(){
         list = new ArrayList<>();
         db = FirebaseFirestore.getInstance();

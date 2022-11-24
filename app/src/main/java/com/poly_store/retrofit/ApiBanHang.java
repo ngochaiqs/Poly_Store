@@ -144,6 +144,12 @@ public interface ApiBanHang {
             @Field("status") int status,
             @Field("maND") int maND
     );
+    @POST("gettoken.php")
+    @FormUrlEncoded
+    Observable<NguoiDungModel> getTokenChat(
+            @Field("status") int status,
+            @Field("maND") int maND
+    );
 
     @POST("updatetoken.php")
     @FormUrlEncoded
