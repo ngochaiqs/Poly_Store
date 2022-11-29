@@ -5,6 +5,7 @@ import com.poly_store.model.DonHangModel;
 import com.poly_store.model.LoaiSPModel;
 import com.poly_store.model.MessageModel;
 import com.poly_store.model.NguoiDungModel;
+import com.poly_store.model.NhaCungCapModel;
 import com.poly_store.model.SanPhamModel;
 import com.poly_store.model.ThongKeModel;
 
@@ -24,6 +25,11 @@ public interface ApiBanHang {
 
     @GET("getsanpham.php")
     Observable<SanPhamModel> getSanPham();
+
+    @GET("getnhacungcap.php")
+    Observable<NhaCungCapModel> getNhaCungCap();
+    @GET("getspnncc.php")
+    Observable<NhaCungCapModel> getSpinnerNCC();
 
     @GET("thongke.php")
     Observable<ThongKeModel> getThongKe();
@@ -99,23 +105,6 @@ public interface ApiBanHang {
             @Field("timKiem") String timKiem
 
     );
-
-
-    @POST("xoa.php")
-    @FormUrlEncoded
-    Observable<SanPhamModel> xoaSanPham(
-            @Field("maSP") int maSP
-
-    );
-
-    @POST("doimatkhau.php")
-    @FormUrlEncoded
-    Observable<NguoiDungModel> doiMatKhau(
-            @Field("email") String email,
-            @Field("matKhau") String matKhau
-
-    );
-
     @POST("themsp.php")
     @FormUrlEncoded
     Observable<MessageModel> themSP(
@@ -123,7 +112,8 @@ public interface ApiBanHang {
             @Field("giaSP") String giaSP,
             @Field("hinhAnhSP") String hinhAnhSP,
             @Field("moTa") String moTa,
-            @Field("maLoai") int maLoai
+            @Field("maLoai") int maLoai,
+            @Field("maNCC") int maNCC
     );
 
     @POST("updatesp.php")
@@ -134,7 +124,51 @@ public interface ApiBanHang {
             @Field("hinhAnhSP") String hinhAnhSP,
             @Field("moTa") String moTa,
             @Field("maLoai") int maLoai,
+            @Field("maNCC") int maNCC,
             @Field("maSP") int maSP
+
+    );
+
+    @POST("xoa.php")
+    @FormUrlEncoded
+    Observable<SanPhamModel> xoaSanPham(
+            @Field("maSP") int maSP
+
+    );
+
+
+
+    @POST("doimatkhau.php")
+    @FormUrlEncoded
+    Observable<NguoiDungModel> doiMatKhau(
+            @Field("email") String email,
+            @Field("matKhau") String matKhau
+
+    );
+
+    @POST("themncc.php")
+    @FormUrlEncoded
+    Observable<NhaCungCapModel> themNCC(
+            @Field("tenNCC") String tenNCC,
+            @Field("SDTNCC") String SDTNCC,
+            @Field("diaChiNCC") String diaChiNCC
+
+    );
+
+    @POST("suancc.php")
+    @FormUrlEncoded
+    Observable<NhaCungCapModel> suaNCC(
+            @Field("tenNCC") String tenNCC,
+            @Field("SDTNCC") String SDTNCC,
+            @Field("diaChiNCC") String diaChiNCC,
+            @Field("maNCC") int maNCC
+
+    );
+
+    @POST("xoancc.php")
+    @FormUrlEncoded
+    Observable<NhaCungCapModel> xoaNhaCungCap(
+            @Field("maNCC") int maNCC
 
     );
 

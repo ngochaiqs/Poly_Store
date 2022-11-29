@@ -173,6 +173,10 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(doiMatKhau);
                         break;
                     case 6:
+                        Intent nhaCungCap = new Intent(getApplicationContext(), NhaCungCapActivity.class);
+                        startActivity(nhaCungCap);
+                        break;
+                    case 7:
                         // xóa key nguoidung
                         Paper.book().delete("user");
                         FirebaseAuth.getInstance().signOut();
@@ -216,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
                                 loaiSPList.add(new LoaiSP("Thêm người dùng","https://cdn-icons-png.flaticon.com/512/4175/4175032.png"));
                                 loaiSPList.add(new LoaiSP("Chat","https://cdn-icons-png.flaticon.com/512/589/589708.png"));
                                 loaiSPList.add(new LoaiSP("Đổi mật khẩu","https://cdn-icons-png.flaticon.com/512/3585/3585217.png"));
+                                loaiSPList.add(new LoaiSP("Nhà cung cấp","https://cdn-icons-png.flaticon.com/512/2293/2293553.png"));
                                 loaiSPList.add(new LoaiSP("Đăng xuất","https://cdn-icons-png.flaticon.com/512/159/159707.png"));
                                 loaiSPAdapter = new LoaiSPAdapter(getApplicationContext(),loaiSPList);
                                 lvMain.setAdapter(loaiSPAdapter);

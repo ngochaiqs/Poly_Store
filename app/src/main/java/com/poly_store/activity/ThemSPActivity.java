@@ -22,8 +22,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.poly_store.R;
+import com.poly_store.adapter.NhaCungCapAdapter;
 import com.poly_store.databinding.ActivityThemSpBinding;
 import com.poly_store.model.MessageModel;
+import com.poly_store.model.NhaCungCap;
 import com.poly_store.model.SanPham;
 import com.poly_store.retrofit.ApiBanHang;
 import com.poly_store.retrofit.RetrofitClient;
@@ -44,14 +46,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ThemSPActivity extends AppCompatActivity {
-    Spinner spinner;
+    Spinner spinner, spinnerNCC;
     int loai=0;
+    int ncc=0;
     ActivityThemSpBinding binding;
     ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     SanPham sanPhamSua;
+    List<NhaCungCap> nhaCungCapList;
+    NhaCungCapAdapter nhaCungCapAdapter;
     boolean flag = false;
     String mediaPath;
+    private ArrayList<String> nhaCC = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +68,6 @@ public class ThemSPActivity extends AppCompatActivity {
         initView();
         initData();
         ActionToolBar();
-
         Intent intent = getIntent();
         sanPhamSua = (SanPham) intent.getSerializableExtra("sua");
         if(sanPhamSua == null ){
@@ -79,10 +84,12 @@ public class ThemSPActivity extends AppCompatActivity {
             binding.tenspthemsp.setText(sanPhamSua.getTenSP());
             binding.hinhanh.setText(sanPhamSua.getHinhAnhSP());
             binding.spinnerLoaiThemsp.setSelection(sanPhamSua.getMaLoai());
+            binding.spinnerNCC.setSelection(sanPhamSua.getMaNCC());
         }
 
 
     }
+
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
@@ -98,15 +105,54 @@ public class ThemSPActivity extends AppCompatActivity {
         });
     }
 
+
     private void initData(){
         List<String> stringList = new ArrayList<>();
-        stringList.add("Vui lòng chọn sản phẩm");
+
+        stringList.add("Vui lòng chọn loại sản phẩm");
         stringList.add("Áo khoác");
         stringList.add("Áo thun");
         stringList.add("Áo sơ mi");
         stringList.add("Quần jean");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, stringList);
         spinner.setAdapter(adapter);
+
+            compositeDisposable.add(apiBanHang.getSpinnerNCC()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(nhaCungCapModel -> {
+                        if (nhaCungCapModel.isSuccess()) {
+                            nhaCungCapList = nhaCungCapModel.getResult();
+                            nhaCungCapAdapter = new NhaCungCapAdapter(getApplicationContext(), nhaCungCapList);
+                            nhaCungCapAdapter.notifyDataSetChanged();
+                            nhaCC.add(0, "Vui lòng chọn nhà cung cấp");
+                            for (int i = 0; i < nhaCungCapList.size(); i++) {
+                                nhaCC.add(nhaCungCapList.get(i).getTenNCC());
+                            }
+                            ArrayAdapter<String> adapterNCC = new ArrayAdapter<String>(ThemSPActivity.this, android.R.layout.simple_spinner_item, nhaCC);
+                            adapterNCC.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinnerNCC.setAdapter(adapterNCC);
+                        }
+                    }, throwable -> {
+                        Toast.makeText(getApplicationContext(), "Lỗi", Toast.LENGTH_SHORT).show();
+                    }));
+            spinnerNCC.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                    if (position != 0) {
+//                        binding.spinnerNCC.setSelection(position);
+//                        Log.d("//===", "onItemSelected:  " + position);
+//                    }
+                    binding.spinnerNCC.setSelection(position);
+                    ncc = position;
+                    Log.d("//===", "Mã nhà cung cấp:  " + position);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -235,10 +281,12 @@ public class ThemSPActivity extends AppCompatActivity {
             binding.tilHASP.setError("Vui lòng nhập thêm hình ảnh sản phẩm!");
         }else if(loai == 0) {
             Toast.makeText(this, "Vui lòng chọn loại sản phẩm!", Toast.LENGTH_SHORT).show();
+        }else if(ncc == 0) {
+            Toast.makeText(this, "Vui lòng chọn nhà cung cấp!", Toast.LENGTH_SHORT).show();
         } else {
             final LoadingDialog loadingDialog = new LoadingDialog(ThemSPActivity.this);
             loadingDialog.startLoadingDialog();
-            compositeDisposable.add(apiBanHang.updatesp(str_ten,str_gia,str_hinhanh,str_mota,loai,sanPhamSua.getMaSP())
+            compositeDisposable.add(apiBanHang.updatesp(str_ten,str_gia,str_hinhanh,str_mota,loai,ncc,sanPhamSua.getMaSP())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
@@ -277,10 +325,12 @@ public class ThemSPActivity extends AppCompatActivity {
             binding.tilHASP.setError("Vui lòng nhập thêm hình ảnh sản phẩm!");
         }else if(loai == 0) {
             Toast.makeText(this, "Vui lòng chọn loại sản phẩm!", Toast.LENGTH_SHORT).show();
+        }else if(ncc == 0) {
+            Toast.makeText(this, "Vui lòng chọn nhà cung cấp!", Toast.LENGTH_SHORT).show();
         } else {
             final LoadingDialog loadingDialog = new LoadingDialog(ThemSPActivity.this);
             loadingDialog.startLoadingDialog();
-            compositeDisposable.add(apiBanHang.themSP(str_ten,str_gia,str_hinhanh,str_mota,(loai))
+            compositeDisposable.add(apiBanHang.themSP(str_ten,str_gia,str_hinhanh,str_mota,(loai),(ncc))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
@@ -362,6 +412,7 @@ public class ThemSPActivity extends AppCompatActivity {
 
     private void initView(){
         spinner = findViewById(R.id.spinner_loai_themsp);
+        spinnerNCC = findViewById(R.id.spinnerNCC);
     }
     @Override
     protected void onDestroy(){

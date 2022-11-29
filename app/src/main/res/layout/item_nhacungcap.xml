@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:elevation="8dp"
+    app:cardCornerRadius="40dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_profile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/nhacungcap" />
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tvMaNCC"
+                android:textSize="12sp"
+                android:text="Mã nhà cung cấp: 12"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:textColor="@color/text_color_main"
+                android:padding="5dp"
+                android:id="@+id/tvTenNCC"
+                android:textSize="17sp"
+                android:text="Nhà cung cấp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:drawableStart="@drawable/ic_baseline_phone_24"
+                android:drawablePadding="10dp"
+                android:textColor="@color/text_color_main"
+                android:padding="5dp"
+                android:id="@+id/tvSDTNCC"
+                android:textSize="17sp"
+                android:text="091123123"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/ic_baseline_edit_location_24"
+                android:textColor="@color/text_color_main"
+                android:padding="5dp"
+                android:id="@+id/tvDiaChiNCC"
+                android:textSize="17sp"
+                android:text="Đà Nẵng"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

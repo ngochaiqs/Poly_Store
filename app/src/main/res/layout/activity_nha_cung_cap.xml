@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    tools:context=".activity.NhaCungCapActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toobarNhaCC"
+        app:title="Nhà Cung Cấp"
+        android:background="@drawable/bg_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <ImageView
+            android:src="@drawable/ic_baseline_add_24"
+            android:layout_gravity="right"
+            android:layout_marginRight="18dp"
+            android:id="@+id/img_themNCC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </androidx.appcompat.widget.Toolbar>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleview_nhaCC"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/toobarNhaCC"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ public class SanPham implements Serializable {
     String hinhAnhSP;
     String moTa;
     int maLoai;
+    int maNCC;
 
     public int getMaSP() {
         return maSP;
@@ -56,5 +57,13 @@ public class SanPham implements Serializable {
 
     public void setMaLoai(int maLoai) {
         this.maLoai = maLoai;
+    }
+
+    public int getMaNCC() {
+        return maNCC;
+    }
+
+    public void setMaNCC(int maNCC) {
+        this.maNCC = maNCC;
     }
 }

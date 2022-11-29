@@ -16,19 +16,21 @@ import com.bumptech.glide.Glide;
 import com.nex3z.notificationbadge.NotificationBadge;
 import com.poly_store.R;
 import com.poly_store.model.GioHang;
+import com.poly_store.model.NhaCungCap;
 import com.poly_store.model.SanPham;
 import com.poly_store.utils.Utils;
 
 import java.text.DecimalFormat;
 
 public class ChiTietActivity extends AppCompatActivity {
-    TextView tensp, giasp, mota;
+    TextView tensp, giasp, mota, nhacungcap;
     Button btnthem;
     ImageView imghinhanh;
     Spinner spinner;
     Toolbar toolbar;
     SanPham sanPham;
     NotificationBadge badge;
+    NhaCungCap nhaCungCap;
 
 
     @Override
@@ -100,6 +102,7 @@ public class ChiTietActivity extends AppCompatActivity {
         tensp.setText(sanPham.getTenSP());
         mota.setText(sanPham.getMoTa());
         giasp.setText(sanPham.getGiaSP());
+        nhacungcap.setText( "Mã nhà cung cấp: " + sanPham.getMaNCC());
         if (sanPham.getHinhAnhSP().contains("http")){
             Glide.with(getApplicationContext()).load(sanPham.getHinhAnhSP()).into(imghinhanh);
         }else{
@@ -118,6 +121,7 @@ public class ChiTietActivity extends AppCompatActivity {
         imghinhanh = findViewById(R.id.imageChitiet);
         toolbar = findViewById(R.id.toolbarchitiet);
         badge = findViewById(R.id.menu_sl);
+        nhacungcap = findViewById(R.id.txtnhacungcap);
         FrameLayout frameLayoutgiohang = findViewById(R.id.framegiohang);
         frameLayoutgiohang.setOnClickListener(new View.OnClickListener() {
             @Override
