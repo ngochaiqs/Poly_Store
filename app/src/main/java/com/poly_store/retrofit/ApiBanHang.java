@@ -23,7 +23,7 @@ public interface ApiBanHang {
     @GET("getloaisp.php")
     Observable<LoaiSPModel> getLoaiSp();
 
-    @GET("getsanpham.php")
+    @GET("chitietsanpham.php")
     Observable<SanPhamModel> getSanPham();
 
     @GET("getnhacungcap.php")
@@ -175,12 +175,6 @@ public interface ApiBanHang {
     @POST("gettoken.php")
     @FormUrlEncoded
     Observable<NguoiDungModel> getToken(
-            @Field("status") int status,
-            @Field("maND") int maND
-    );
-    @POST("gettoken.php")
-    @FormUrlEncoded
-    Observable<NguoiDungModel> getTokenChat(
             @Field("status") int status,
             @Field("maND") int maND
     );

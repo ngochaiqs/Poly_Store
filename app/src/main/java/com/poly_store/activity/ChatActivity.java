@@ -23,6 +23,7 @@ import com.poly_store.model.ChatMessage;
 import com.poly_store.model.NotiSendData;
 import com.poly_store.retrofit.ApiBanHang;
 import com.poly_store.retrofit.ApiPushNofication;
+import com.poly_store.retrofit.RetrofitClient;
 import com.poly_store.retrofit.RetrofitClientNoti;
 import com.poly_store.utils.Utils;
 
@@ -110,7 +111,7 @@ public class ChatActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(str_mess)){
 
         }else {
-//            thongBaoDenND();
+            thongBaoDenND();
             HashMap<String, Object> message = new HashMap<>();
             message.put(Utils.SENDID, String.valueOf(Utils.nguoidung_current.getMaND()));
             message.put(Utils.RECEIVEDID, iduser_str);
@@ -165,7 +166,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void thongBaoDenND() {
         //get token
-        compositeDisposable.add(apiBanHang.getTokenChat(0, Utils.nguoidung_current.getMaND())
+        compositeDisposable.add(apiBanHang.getToken(0, Utils.nguoidung_current.getMaND())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -198,6 +199,7 @@ public class ChatActivity extends AppCompatActivity {
                 ));
     }
     private void initView(){
+        apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         list = new ArrayList<>();
         db = FirebaseFirestore.getInstance();
         recyclerView = findViewById(R.id.recycleview_chat);
