@@ -76,6 +76,7 @@
                 android:textStyle="bold"
                 android:gravity="center"
                 android:textColor="@color/text_color_main"/>
+
             <TextView
                 android:id="@+id/txtgiasp"
                 android:layout_width="match_parent"

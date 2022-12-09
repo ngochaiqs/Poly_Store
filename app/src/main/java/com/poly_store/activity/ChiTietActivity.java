@@ -23,7 +23,7 @@ import com.poly_store.utils.Utils;
 import java.text.DecimalFormat;
 
 public class ChiTietActivity extends AppCompatActivity {
-    TextView tensp, giasp, mota, nhacungcap;
+    TextView tensp, giasp, mota, nhacungcap, diachincc;
     Button btnthem;
     ImageView imghinhanh;
     Spinner spinner;
@@ -102,7 +102,7 @@ public class ChiTietActivity extends AppCompatActivity {
         tensp.setText(sanPham.getTenSP());
         mota.setText(sanPham.getMoTa());
         giasp.setText(sanPham.getGiaSP());
-        nhacungcap.setText( "Mã nhà cung cấp: " + sanPham.getMaNCC());
+        nhacungcap.setText( "Nhà cung cấp: " + sanPham.getTenNCC());
         if (sanPham.getHinhAnhSP().contains("http")){
             Glide.with(getApplicationContext()).load(sanPham.getHinhAnhSP()).into(imghinhanh);
         }else{

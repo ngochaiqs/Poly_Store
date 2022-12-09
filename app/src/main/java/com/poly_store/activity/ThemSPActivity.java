@@ -387,6 +387,7 @@ public class ThemSPActivity extends AppCompatActivity {
                 MessageModel serverResponse = response.body();
                 if (serverResponse != null) {
                     if (serverResponse.isSuccess()) {
+                        Toast.makeText(ThemSPActivity.this, "Chọn hình ảnh sản phẩm thành công!", Toast.LENGTH_SHORT).show();
                         binding.hinhanh.setText(serverResponse.getName());
                         loadingDialog.dismissDialog();
                     } else {

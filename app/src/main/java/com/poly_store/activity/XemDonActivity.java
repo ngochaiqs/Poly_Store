@@ -94,14 +94,8 @@ public class XemDonActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toobar);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         redonhang.setLayoutManager(layoutManager);
-
     }
 
-    @Override
-    protected void onDestroy() {
-        compositeDisposable.clear();
-        super.onDestroy();
-    }
 
     private void showCustumDialog() {
         LayoutInflater inflater = getLayoutInflater();
@@ -238,4 +232,10 @@ public class XemDonActivity extends AppCompatActivity {
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
+    @Override
+    protected void onDestroy() {
+        compositeDisposable.clear();
+        super.onDestroy();
+    }
+
 }
