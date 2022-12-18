@@ -19,6 +19,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.DonHangActivity"
+            android:exported="false"
+            android:label="@string/title_activity_don_hang"
+            android:theme="@style/Theme.Poly_Store.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activity.ThemNhaCCActivity"
             android:exported="true" />
         <activity
