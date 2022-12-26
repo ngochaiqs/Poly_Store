@@ -131,14 +131,18 @@ public class DoiMatKhauActivity extends AppCompatActivity {
             line3DMK.setError("Vui lòng nhập mật khẩu cũ!");
         }else if(TextUtils.isEmpty(str_email)) {
             Toast.makeText(getApplicationContext(), "Chưa nhập Email!", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(str_matKhauMoi)) {
+        } else if (TextUtils.isEmpty(str_matKhauMoi) ) {
             line4DMK.setError("Vui lòng nhập mật khẩu mới!");
+        } else if (str_matKhauMoi.length() < 6) {
+            line4DMK.setError("Mật khẩu phải có ít nhất 6 ký tự!");
+        } else if (str_reMatKhauMoi.length() < 6) {
+            line5DMK.setError("Mật khẩu phải có ít nhất 6 ký tự!");
         } else if (TextUtils.isEmpty(str_reMatKhauMoi)) {
             line5DMK.setError("Vui lòng xác nhận mật khẩu mới!");
         }else{
             if (str_matKhauMoi.equals(str_reMatKhauMoi)){
 
-                postData(str_email,str_matKhauMoi);
+                postData(str_email,str_MatKhauCu, str_matKhauMoi);
             }else{
                 Toast.makeText(getApplicationContext(), "Mật khẩu mới chưa khớp!", Toast.LENGTH_SHORT).show();
                 line4DMK.setError("Mật khẩu mới chưa khớp!");
@@ -146,11 +150,11 @@ public class DoiMatKhauActivity extends AppCompatActivity {
             }
         }
     }
-    private void  postData(String str_email, String str_matKhauMoi){
+    private void  postData(String str_email, String str_matKhauCu, String str_matKhauMoi){
         //post data
         final LoadingDialog loadingDialog = new LoadingDialog(DoiMatKhauActivity.this);
         loadingDialog.startLoadingDialog();
-        compositeDisposable.add(apiBanHang.doiMatKhau(str_email, str_matKhauMoi)
+        compositeDisposable.add(apiBanHang.doiMatKhau(str_email, str_matKhauCu, str_matKhauMoi)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
