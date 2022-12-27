@@ -61,6 +61,7 @@ public class ThemSPActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //su dung dataBinding
         binding = ActivityThemSpBinding.inflate(getLayoutInflater());
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
 
