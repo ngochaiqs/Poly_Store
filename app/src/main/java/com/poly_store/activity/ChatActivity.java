@@ -111,7 +111,7 @@ public class ChatActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(str_mess)){
 
         }else {
-            thongBaoDenND();
+            guiThongBaoND();
             HashMap<String, Object> message = new HashMap<>();
             message.put(Utils.SENDID, String.valueOf(Utils.nguoidung_current.getMaND()));
             message.put(Utils.RECEIVEDID, iduser_str);
@@ -163,10 +163,9 @@ public class ChatActivity extends AppCompatActivity {
     private String format_date(Date date){
         return new SimpleDateFormat("hh:mm a- dd MMM yyyy", Locale.getDefault()).format(date);
     }
-
-    private void thongBaoDenND() {
+    private void guiThongBaoND() {
         //get token
-        compositeDisposable.add(apiBanHang.getToken(0, Utils.nguoidung_current.getMaND())
+        compositeDisposable.add(apiBanHang.getToken(0, Integer.parseInt(iduser_str))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -176,7 +175,7 @@ public class ChatActivity extends AppCompatActivity {
                                     Log.d("===//", "Token User nhận thông báo: " + nguoiDungModel.getResult().get(i).getToken());
                                     Map<String, String> data = new HashMap<>();
                                     data.put("title", "Thông báo từ Poly Store!");
-                                    data.put("body", "Bạn nhận được tin nhắn mới từ Poly Store!");
+                                    data.put("body", "Bạn nhận được tin nhắn mới từ Poly Store. Vui lòng kiểm tra tin nhắn!");
                                     NotiSendData notiSendData = new NotiSendData(nguoiDungModel.getResult().get(i).getToken(), data);
                                     ApiPushNofication apiPushNofication = RetrofitClientNoti.getInstance().create(ApiPushNofication.class);
                                     compositeDisposable.add(apiPushNofication.sendNofitication(notiSendData)

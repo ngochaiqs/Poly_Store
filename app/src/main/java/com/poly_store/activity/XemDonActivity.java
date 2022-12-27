@@ -142,7 +142,7 @@ public class XemDonActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         messageModel -> {
-                            pushNotiToUser();
+                            guiThongBaoND();
                             getOrder();
                             Toast.makeText(this, messageModel.getMessage(), Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
@@ -152,7 +152,7 @@ public class XemDonActivity extends AppCompatActivity {
                         }
                 ));
     }
-    private void pushNotiToUser() {
+    private void guiThongBaoND() {
         //get token
         compositeDisposable.add(apiBanHang.getToken(0, donHang.getMaND())
                 .subscribeOn(Schedulers.io())
