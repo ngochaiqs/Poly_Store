@@ -5,6 +5,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
+    //file ket noi voi php (server)
     private static Retrofit instance;
     public static Retrofit getInstance(String baseUrl){
         if (instance == null){

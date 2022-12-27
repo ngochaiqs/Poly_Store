@@ -56,6 +56,8 @@ public class QuanLiActivity extends AppCompatActivity {
         getSpMoi();
         ActionToolBar();
     }
+
+    //chuyen sang themSP khi an vao anh
     private void initControl(){
         img_them.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +67,7 @@ public class QuanLiActivity extends AppCompatActivity {
             }
         });
     }
+    //lay du lieu cua san pham co o database hien thi len recyclerVIew
     private void getSpMoi() {
         compositeDisposable.add(apiBanHang.getSanPham().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -82,6 +85,7 @@ public class QuanLiActivity extends AppCompatActivity {
                 ));
     }
 
+    //mapping
     private void initView() {
         toolbar = findViewById(R.id.toolbarQuanLi);
         img_them = findViewById(R.id.img_them);
@@ -104,6 +108,7 @@ public class QuanLiActivity extends AppCompatActivity {
         });
     }
 
+    //nhan vao san pham hien dialog Sua hoac Xoa
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         if(item.getTitle().equals("Sửa")){
@@ -123,14 +128,18 @@ public class QuanLiActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 final LoadingDialog loadingDialog = new LoadingDialog(QuanLiActivity.this);
                 loadingDialog.startLoadingDialog();
+                //ket noi client voi server de thuc hien truy van xoa san pham
                 compositeDisposable.add(apiBanHang.xoaSanPham(sanPhamSuaXoa.getMaSP())
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 messageModel -> {
+                                    //neu xoa thanh cong
                                     if(messageModel.isSuccess()){
                                         loadingDialog.dismissDialog();
+                                        //hien thi thong bao thanh cong
                                         Toast.makeText(getApplicationContext(),messageModel.getMessage(),Toast.LENGTH_LONG).show();
+                                        //
                                         getSpMoi();
                                     }else {
                                         loadingDialog.dismissDialog();
