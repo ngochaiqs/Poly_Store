@@ -6,4 +6,10 @@
     <string name="title_activity_thong_ke">ThongKeActivity</string>
     <string name="tab_text_1">Sản phẩm</string>
     <string name="tab_text_2">Doanh thu</string>
+    <string name="tab_main_2">Áo Thun</string>
+    <string name="tab_main_1">Áo Khoác</string>
+    <string name="tab_main_3">Áo Sơ Mi</string>
+    <string name="tab_main_4">Quần Jeans</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

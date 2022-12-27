@@ -77,25 +77,32 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/bg_corner_18"
                 android:orientation="vertical">
-
-                <TextView
+                <com.google.android.material.appbar.AppBarLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_12"
-                    android:layout_marginRight="12dp"
-                    android:background="@drawable/bg_corner_18"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:textColor="@color/text_color_main"
-                    android:textSize="22sp" />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerviewMain"
+                    android:theme="@style/Theme.Poly_Store.AppBarOverlay">
+                    <com.google.android.material.tabs.TabLayout
+                        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+                        android:id="@+id/tabs"
+                        app:tabMode="scrollable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/view_pager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="6dp"
-                    >
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerviewMain"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="6dp"
+                        >
+                    </androidx.recyclerview.widget.RecyclerView>
+                </androidx.viewpager.widget.ViewPager>
 
-                </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
         </LinearLayout>
 

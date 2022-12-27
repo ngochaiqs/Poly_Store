@@ -19,7 +19,7 @@ public class SplashActivity extends AppCompatActivity {
         Thread thread = new Thread() {
             public void run() {
                 try {
-                    sleep(1500);
+                    sleep(3000);
                 } catch (Exception ex) {
 
                 } finally {

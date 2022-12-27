@@ -25,13 +25,16 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.nex3z.notificationbadge.NotificationBadge;
 import com.poly_store.R;
+import com.poly_store.activity.ui.main.SectionsPagerAdapter2;
 import com.poly_store.adapter.LoaiSPAdapter;
 import com.poly_store.adapter.SanPhamAdapter;
 import com.poly_store.model.EventBus.SuaXoaEvent;
@@ -71,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout frameLayout;
     ImageView imgsearch, imageMess, img_them;
     SanPham sanPhamSuaXoa;
-
+    ViewPager viewPager;
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         if(isConnected(this)){
             //ActionViewFlipper();
             getLoaiSanPham();
-            getSanPham();
+            //getSanPham();
             getClickMenu();
         }else {
             Toast.makeText(getApplicationContext(), "Không có Internet", Toast.LENGTH_SHORT).show();
@@ -230,6 +234,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void AnhXa() {
+        viewPager = findViewById(R.id.view_pager);
+        tabLayout = findViewById(R.id.tabs);
         img_them = findViewById(R.id.img_them);
         imageMess = findViewById(R.id.image_mess);
         imgsearch = findViewById(R.id.imgsearch);
@@ -244,6 +250,10 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerlayout);
          badge = findViewById(R.id.menu_sl);
         frameLayout = findViewById(R.id.framegiohang);
+
+        SectionsPagerAdapter2 sectionsPagerAdapter2 = new SectionsPagerAdapter2(this, getSupportFragmentManager());
+        viewPager.setAdapter(sectionsPagerAdapter2);
+        tabLayout.setupWithViewPager(viewPager);
         //khoi tao list
         loaiSPList = new ArrayList<>();
         sanPhamList = new ArrayList<>();
@@ -327,7 +337,9 @@ public class MainActivity extends AppCompatActivity {
                                     if(messageModel.isSuccess()){
                                         loadingDialog.dismissDialog();
                                         Toast.makeText(getApplicationContext(),messageModel.getMessage(),Toast.LENGTH_LONG).show();
-                                        getSanPham();
+                                        viewPager.setAdapter(new SectionsPagerAdapter2(getApplicationContext(),getSupportFragmentManager()));
+                                        tabLayout.setupWithViewPager(viewPager);
+
                                     }else {
                                         loadingDialog.dismissDialog();
                                         Toast.makeText(getApplicationContext(),messageModel.getMessage(),Toast.LENGTH_LONG).show();
