@@ -19,13 +19,6 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity4"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".MainActivity3"
             android:exported="false">
             <meta-data
@@ -33,14 +26,21 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity2"
+            android:name=".MainActivity5"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity5"
+            android:name=".MainActivity4"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".MainActivity2"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
