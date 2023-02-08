@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.poly_store.R;
 
 
 public class poly extends AppCompatActivity {
