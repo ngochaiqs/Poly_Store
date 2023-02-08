@@ -19,40 +19,6 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity2fdsfsd"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".MainActivitytyhty"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".MainActivity3"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".MainActivity2"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".FullscreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
-            android:label="@string/title_activity_fullscreen"
-            android:theme="@style/Theme.Poly_Store.Fullscreen" />
-        <activity
             android:name=".Store"
             android:exported="false" />
         <activity

@@ -1,8 +1,10 @@
 package com.poly_store.activity;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.poly_store.R;
 
 public class MainActivity2fdsfsd extends AppCompatActivity {
 
